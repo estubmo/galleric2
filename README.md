@@ -2,14 +2,14 @@
 
 This is a full-stack TypeScript example using:
 
--   Frontend:
-    -   Next.js and [SWR](https://github.com/zeit/swr)
-    -   [react-stripe-js](https://github.com/stripe/react-stripe-js) for [Checkout](https://stripe.com/checkout) and [Elements](https://stripe.com/elements)
--   Backend
-    -   Next.js [API routes](https://nextjs.org/docs/api-routes/introduction)
-    -   [Strapi Headless CMS](https://github.com/strapi/strapi)
-    -   [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss)
-    -   [stripe-node with TypeScript](https://github.com/stripe/stripe-node#usage-with-typescript)
+- Frontend:
+  - Next.js and [SWR](https://github.com/zeit/swr)
+  - [react-stripe-js](https://github.com/stripe/react-stripe-js) for [Checkout](https://stripe.com/checkout) and [Elements](https://stripe.com/elements)
+- Backend
+  - Next.js [API routes](https://nextjs.org/docs/api-routes/introduction)
+  - [Strapi Headless CMS](https://github.com/strapi/strapi)
+  - [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss)
+  - [stripe-node with TypeScript](https://github.com/stripe/stripe-node#usage-with-typescript)
 
 ## Why?
 
@@ -24,4 +24,4 @@ Having a headless CMS as the backend has been a great experience so far, and the
 
 ## Author
 
--   [@estubmo](https://www.linkedin.com/in/eiriksmo/)
+- [@estubmo](https://www.linkedin.com/in/eiriksmo/)
