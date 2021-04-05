@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+
+.example-container div {
+    background: white;
+    border-radius: 30px;
+    width: 150px;
+    height: 150px;
+    will-change: transform;
+}
+
+.overlay {
+    position: fixed;
+    display: block;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    cursor: pointer;
+}
+
+.content {
+    margin: 15% auto;
+    background-color: white;
+    border-radius: 0.25rem;
+    width: 50vw;
+    padding: 2rem;
+    position: relative;
+}
+
+.scroll-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    will-change: transform;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #5c5c5c;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}
+::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+    transition: 0.2s linear left;
+    /* maybe other vendor-prefixed transitions */
+}
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    transition: 0.2s linear top;
+    /* maybe other vendor-prefixed transitions */
+}
+
+@tailwind utilities;
+
+@layer utilities {
+    @variants hover, focus {
+        .filter-none {
+            filter: none;
+        }
+        .filter-grayscale {
+            filter: grayscale(100%);
+        }
+    }
+}
