@@ -27,7 +27,7 @@ export const ProductCard = ({ product, isModal = false }: ProductCardProps): JSX
                     layoutId={`product-container-${product.slug}`}>
                     <PerfectScrollbar
                         options={{ wheelPropagation: false }}
-                        containerRef={(ref) => {
+                        containerRef={(ref: any) => {
                             if (ref) {
                                 // https://github.com/mdbootstrap/perfect-scrollbar/pull/934/files
                                 // injecting a fix for this issue

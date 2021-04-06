@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
@@ -5,7 +6,8 @@ import useSWR from 'swr';
 import Cart from '../components/Cart';
 import ClearCart from '../components/ClearCart';
 import PrintObject from '../components/PrintObject';
-import { fetchGetJSON } from '../utils/api-helpers';
+
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const ResultPage: NextPage = () => {
     const router = useRouter();
@@ -14,7 +16,7 @@ const ResultPage: NextPage = () => {
     // https://nextjs.org/docs/basic-features/data-fetching#static-generation
     const { data, error } = useSWR(
         router.query.session_id ? `/api/checkout_sessions/${router.query.session_id}` : null,
-        fetchGetJSON
+        fetcher
     );
 
     if (error) return <div>failed to load</div>;

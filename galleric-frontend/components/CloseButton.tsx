@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import * as React from 'react';
 
-const Path = (props) => (
+const Path = (props: any) => (
     <motion.path
         fill="transparent"
         strokeWidth="3"

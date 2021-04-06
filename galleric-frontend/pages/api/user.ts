@@ -2,9 +2,10 @@ import axios from 'axios';
 import { NextApiResponse } from 'next';
 
 import withSession from '../../lib/session';
+import { NextApiRequestExtended } from '../../types/nextapirequest';
 import { API_URL } from '../../utils/urls';
 
-export default withSession(async (req: any, res: NextApiResponse) => {
+export default withSession(async (req: NextApiRequestExtended, res: NextApiResponse) => {
     const jwt = req.session.get('jwt');
     const user = req.session.get('user');
 

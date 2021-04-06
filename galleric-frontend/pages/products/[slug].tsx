@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
 
 import { ProductCard } from '../../components/Product/ProductCard';
@@ -7,6 +8,10 @@ import { API_URL } from '../../utils/urls';
 
 interface IProps {
     product: IProduct;
+}
+
+interface IParams extends ParsedUrlQuery {
+    slug: string;
 }
 
 const Post = ({ product }: IProps): JSX.Element => {
@@ -19,7 +24,9 @@ const Post = ({ product }: IProps): JSX.Element => {
 
 export default Post;
 
-export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
+export const getStaticProps: GetStaticProps = async (context) => {
+    const { slug } = context.params as IParams;
+
     const product_res = await fetch(`${API_URL}/products/?slug=${slug}`);
 
     const found = await product_res.json();

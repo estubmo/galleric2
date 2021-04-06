@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 const SoldArt = (): JSX.Element => {
-    const { isPreview } = useRouter();
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -20,7 +18,6 @@ const SoldArt = (): JSX.Element => {
             </div> */}
 
             <div className="grid gap-4 grid-cols-3">
-                <>{isPreview ? <h1>Preview Mode Enabled</h1> : <h1>Preview Mode Not Enabled</h1>}</>
                 <div>1</div>
                 <div>2</div>
                 <div>3</div>
@@ -33,12 +30,6 @@ const SoldArt = (): JSX.Element => {
             </div>
         </motion.div>
     );
-};
-
-export const getServerSideProps = async (context) => {
-    return {
-        props: {} // will be passed to the page component as props
-    };
 };
 
 export default SoldArt;

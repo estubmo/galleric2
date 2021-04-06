@@ -1,4 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import axios from 'axios';
+import { NextApiRequest } from 'next';
 import Stripe from 'stripe';
 /*
  * Product data can be loaded from anywhere. In this case, we’re loading it from
@@ -10,7 +11,8 @@ import Stripe from 'stripe';
  */
 import { validateCartItems } from 'use-shopping-cart/src/serverUtil';
 
-import inventory from '../../../data/products.json';
+import { API_URL } from '../../../utils/urls';
+
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     // https://github.com/stripe/stripe-node#configuration
@@ -18,12 +20,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: any) {
     if (req.method === 'POST') {
         try {
+            const response = await axios.get(`${API_URL}/products/`);
+            const products = response.data;
             // Validate the cart details that were sent from the client.
             const cartItems = req.body;
-            const line_items = validateCartItems(inventory, cartItems);
+            const line_items = validateCartItems(products, cartItems);
             // Create Checkout Sessions from body params.
             const params: Stripe.Checkout.SessionCreateParams = {
                 submit_type: 'pay',

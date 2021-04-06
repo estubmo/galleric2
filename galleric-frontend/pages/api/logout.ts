@@ -1,6 +1,9 @@
-import withSession from '../../lib/session';
+import { NextApiResponse } from 'next';
 
-export default withSession(async (req: any, res: any) => {
+import withSession from '../../lib/session';
+import { NextApiRequestExtended } from '../../types/nextapirequest';
+
+export default withSession(async (req: NextApiRequestExtended, res: NextApiResponse) => {
     req.session.destroy();
     res.end();
 });
