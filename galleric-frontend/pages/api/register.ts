@@ -2,10 +2,10 @@ import axios from 'axios';
 import { NextApiResponse } from 'next';
 
 import withSession from '../../lib/session';
-import { NextApiRequestExtended } from '../../types/nextapirequest';
+import { NextApiRequestWithIronSession } from '../../types/nextapirequest';
 import { API_URL } from '../../utils/urls';
 
-export default withSession(async (req: NextApiRequestExtended, res: NextApiResponse) => {
+export default withSession(async (req: NextApiRequestWithIronSession, res: NextApiResponse) => {
     const { identifier, password } = await req.body;
     try {
         const response = await axios.post(`${API_URL}/auth/local/register`, {
