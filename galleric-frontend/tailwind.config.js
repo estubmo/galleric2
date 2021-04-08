@@ -77,7 +77,8 @@ module.exports = {
             textDecoration: ['focus-visible'],
             textFill: ['autofill'],
             shadowFill: ['autofill'],
-            opacity: ['disabled']
+            opacity: ['disabled'],
+            cursor: ['disabled']
         }
     },
     plugins: [

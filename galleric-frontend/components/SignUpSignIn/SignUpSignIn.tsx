@@ -38,12 +38,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
     const handleSignIn = async () => {
         router.prefetch('/');
         try {
-            // const response = await loginUser(email, password);
-            // if (response?.status === 200) {
-            //     router.push('/');
-            // }
             setRedirectTo('/');
-
             await mutateUser(
                 axios.post(
                     '/api/login',
@@ -56,17 +51,8 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                     }
                 )
             );
-
-            // await mutateUser(
-            //     fetchJson("/api/login", {
-            //       method: "POST",
-            //       headers: { "Content-Type": "application/json" },
-            //       body: JSON.stringify(body),
-            //     }),
-            //   );
         } catch (error) {
             setErrorMessage(error.response.data.message);
-        } finally {
             setIsLoading(false);
         }
     };
@@ -88,13 +74,8 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                     password: password
                 })
             );
-            // const response = await signupUser(email, password);
-            // if (response?.status === 200) {
-            //     router.push(`/verify?email=${email}`, '/signup');
-            // }
         } catch (error) {
             setErrorMessage(error.response.data.message);
-        } finally {
             setIsLoading(false);
         }
     };
@@ -115,7 +96,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
     };
 
     return (
-        <div className="pt-14 h-screen bg-gray-900">
+        <div className="h-screen bg-gray-900">
             <Head>
                 <title>Galleric | Sign {sign}</title>
                 <meta name="description" content={`Sign ${sign}`} />
@@ -126,18 +107,18 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                 animate="visible"
                 exit="exit"
                 variants={containerVariants}
-                className="flex flex-col items-center mt-12 p-24 w-full h-screen">
+                className="flex flex-col items-center justify-center w-full h-screen md:p-24">
                 <AnimateSharedLayout type="crossfade">
                     <AnimatePresence exitBeforeEnter>
                         <motion.form
-                            className="flex flex-col items-start w-1/2 h-screen font-light tracking-widest"
+                            className="flex flex-col items-start max-w-lg h-50v font-light tracking-widest md:w-2/3"
                             onSubmit={handleSubmit}
                             key="signInUpForm">
                             <motion.h2
                                 variants={childrenVariants}
                                 className="flex text-gray-400 text-4xl">
                                 <Link href="/sign?sign=in" as="/signin" passHref>
-                                    <button className="focus-visible:underline font-thin tracking-widest focus:outline-none cursor-pointer">
+                                    <div className="focus-visible:underline font-thin tracking-widest focus:outline-none cursor-pointer">
                                         <a>
                                             <motion.div
                                                 className={clsx('', {
@@ -156,11 +137,11 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                                 }}
                                             />
                                         )}
-                                    </button>
+                                    </div>
                                 </Link>
                                 <div className="mx-4 font-thin tracking-widest">or</div>
                                 <Link href="/sign?sign=up" as="/signup" passHref>
-                                    <button className="focus-visible:underline font-thin tracking-widest focus:outline-none cursor-pointer">
+                                    <div className="focus-visible:underline font-thin tracking-widest focus:outline-none cursor-pointer">
                                         <a>
                                             <motion.div
                                                 className={clsx('', {
@@ -179,7 +160,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                                 }}
                                             />
                                         )}
-                                    </button>
+                                    </div>
                                 </Link>
                             </motion.h2>
 
@@ -215,8 +196,8 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
 
                             <motion.button
                                 variants={childrenVariants}
-                                className="mt-4 pl-4 pr-10 py-2 text-gray-100 focus-visible:underline font-light tracking-wider bg-gray-800 disabled:bg-red-500 border-b border-gray-400 focus:outline-none uppercase"
-                                whileHover={{ scale: 1.1 }}
+                                className="mt-4 pl-4 pr-10 py-2 text-gray-100 focus-visible:underline font-light tracking-wider bg-gray-800 border-b border-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-wait uppercase"
+                                whileHover={{ scale: isLoading ? 1 : 1.1 }}
                                 disabled={isLoading}
                                 type="submit">
                                 Sign
