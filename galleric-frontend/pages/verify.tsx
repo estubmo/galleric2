@@ -4,11 +4,11 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Router from 'next/router';
 import React, { useEffect, useState } from 'react';
-import ReactCodeInput from 'react-verification-code-input';
 import useSWR from 'swr';
 
 import { PageWrapper } from '../components/PageWrapper';
-import { errorMessageVariant } from '../utils/variants';
+import { VerificationCodeInput } from '../components/VerificationCodeInput';
+import { childrenVariants, errorMessageVariant } from '../utils/variants';
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -16,12 +16,11 @@ const Verify: NextPage = () => {
     const [refreshInterval, setRefreshInterval] = useState<number>(5000);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const { data } = useSWR('/api/is-confirmed', fetcher, {
         refreshInterval: refreshInterval
     });
-
-    // if (!data) router.push('/sign?sign=in', '/signin');
 
     useEffect(() => {
         if (data && data.confirmed) {
@@ -29,11 +28,11 @@ const Verify: NextPage = () => {
             Router.push('/');
         }
     }, [data]);
-    const handleChange = () => {
-        setErrorMessage('');
-    };
+
     const handleComplete = async (val: string) => {
         console.log('val', val);
+        setErrorMessage('');
+        setIsLoading(true);
         try {
             const response = await axios.post('/api/verify/', {
                 email: data?.email,
@@ -42,12 +41,12 @@ const Verify: NextPage = () => {
             console.log('response.data', response.data);
             setSuccessMessage(`Successfully verified ${data?.email}!`);
         } catch (error) {
+            console.log('error', error);
+            setIsLoading(false);
             setErrorMessage(error.response.data.message);
         }
     };
-    //TODO: Here, revalidate user and see if it is confirmed.
-    //If it is, change text to "Email verified. Redirecting...
-    // and redirect to '/'
+
     return (
         <>
             <Head>
@@ -55,26 +54,49 @@ const Verify: NextPage = () => {
                 <meta name="description" content="Verify Email" />
             </Head>
             <PageWrapper>
-                <div className="flex flex-col items-center justify-center">
-                    {data && data.email && !data.confirmed && (
-                        <div>
-                            We sent an email to{' '}
-                            <span className="ml-1 text-yellow-400 font-mono"> {data.email}</span>!
-                            Please check your email for a verification link.
-                        </div>
+                <div className="flex flex-col items-center px-4 h-60v text-xs sm:w-3/4 sm:text-base">
+                    {data && data.email && (
+                        <>
+                            <motion.h2
+                                className="text-gray-400 text-4xl font-thin tracking-widest"
+                                variants={childrenVariants}>
+                                Verification
+                            </motion.h2>
+                            <motion.div variants={childrenVariants} className="mt-4">
+                                We sent an email to{' '}
+                                <span className="ml-1 text-yellow-400 font-mono">
+                                    {' '}
+                                    {data.email}
+                                </span>
+                                ! Please check your inbox for a verification link.
+                            </motion.div>
+                        </>
                     )}
                     {data && (
-                        <div className="mt-2">
-                            <div>Or enter your verification code here:</div>
-                            <ReactCodeInput
-                                className="bg-grey-900 text-grey-100 border-gray-100"
+                        <motion.div
+                            variants={childrenVariants}
+                            className="flex flex-col items-center mt-4">
+                            <div className="mb-1">Or enter your verification code here:</div>
+                            <VerificationCodeInput
                                 type="number"
-                                fieldWidth={46}
-                                fieldHeight={46}
-                                onChange={() => handleChange()}
+                                fieldWidth={42}
+                                fieldHeight={42}
+                                // onChange={() => handleChange()}
+                                isLoading={isLoading}
                                 onComplete={(val) => handleComplete(val)}
                             />
-                        </div>
+                        </motion.div>
+                    )}
+                    {isLoading && (
+                        <motion.p
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                            layout
+                            variants={errorMessageVariant}
+                            className="mt-4 text-gray-100">
+                            Loading...
+                        </motion.p>
                     )}
                     {errorMessage && (
                         <motion.p
