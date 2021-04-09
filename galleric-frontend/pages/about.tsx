@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 
+import { PageWrapper } from '../components/PageWrapper';
 import { childrenVariants, containerVariants } from '../utils/variants';
 
 const About = (): JSX.Element => {
     return (
-        <div className="flex flex-col items-center w-full h-auto bg-gray-900">
+        <PageWrapper>
             <motion.div
                 initial="hidden"
                 animate="visible"
@@ -98,7 +99,7 @@ const About = (): JSX.Element => {
                     elit. Quam minus delectus excepturi numquam
                 </motion.p>
             </motion.div>
-        </div>
+        </PageWrapper>
     );
 };
 

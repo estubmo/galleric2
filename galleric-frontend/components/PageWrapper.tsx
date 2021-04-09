@@ -14,7 +14,7 @@ export const PageWrapper = ({ children }: IPageWrapperProps): JSX.Element => {
             animate="visible"
             // exit="exit"
             variants={containerVariants}
-            className="flex items-center justify-center pt-14 h-screen bg-gray-900">
+            className="flex items-center justify-center min-h-screen font-light tracking-widest bg-gray-900">
             {children}
         </motion.div>
     );

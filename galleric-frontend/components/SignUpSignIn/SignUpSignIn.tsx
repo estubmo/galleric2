@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { useAsyncSetState } from '../../lib/hooks';
 import useUser from '../../lib/useUser';
 import { childrenVariants, containerVariants, errorMessageVariant } from '../../utils/variants';
+import { PageWrapper } from '../PageWrapper';
 
 interface SignUpSignInProps {
     sign: string | string[];
@@ -96,18 +97,12 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
     };
 
     return (
-        <div className="h-screen bg-gray-900">
+        <>
             <Head>
                 <title>Galleric | Sign {sign}</title>
                 <meta name="description" content={`Sign ${sign}`} />
             </Head>
-
-            <motion.div
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={containerVariants}
-                className="flex flex-col items-center justify-center w-full h-screen md:p-24">
+            <PageWrapper>
                 <AnimateSharedLayout type="crossfade">
                     <AnimatePresence exitBeforeEnter>
                         <motion.form
@@ -255,7 +250,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                         </motion.form>
                     </AnimatePresence>
                 </AnimateSharedLayout>
-            </motion.div>
-        </div>
+            </PageWrapper>
+        </>
     );
 };
