@@ -17,6 +17,7 @@ const Verify: NextPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [resent, setResent] = useState(false);
 
     const { data } = useSWR('/api/is-confirmed', fetcher, {
         refreshInterval: refreshInterval
@@ -34,12 +35,24 @@ const Verify: NextPage = () => {
         setErrorMessage('');
         setIsLoading(true);
         try {
-            const response = await axios.post('/api/verify/', {
+            const response = await axios.post('/api/verify', {
                 email: data?.email,
                 confirmationToken: val
             });
             console.log('response.data', response.data);
             setSuccessMessage(`Successfully verified ${data?.email}!`);
+        } catch (error) {
+            console.log('error', error);
+            setIsLoading(false);
+            setErrorMessage(error.response.data.message);
+        }
+    };
+
+    const handleResendEmail = async () => {
+        try {
+            const response = await axios.post('/api/send-email-confirmation');
+            console.log('response.data', response.data);
+            setSuccessMessage('Resent verification email!');
         } catch (error) {
             console.log('error', error);
             setIsLoading(false);
@@ -70,6 +83,14 @@ const Verify: NextPage = () => {
                                 </span>
                                 ! Please check your inbox for a verification link.
                             </motion.div>
+                            <div
+                                className="text-blue-600"
+                                role="button"
+                                tabIndex={0}
+                                onClick={handleResendEmail}
+                                onKeyPress={handleResendEmail}>
+                                Resend email.
+                            </div>
                         </>
                     )}
                     {data && (
@@ -96,6 +117,17 @@ const Verify: NextPage = () => {
                             variants={errorMessageVariant}
                             className="mt-4 text-gray-100">
                             Loading...
+                        </motion.p>
+                    )}
+                    {resent && (
+                        <motion.p
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                            layout
+                            variants={errorMessageVariant}
+                            className="mt-4 text-gray-100">
+                            Resent...
                         </motion.p>
                     )}
                     {errorMessage && (
