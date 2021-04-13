@@ -12,9 +12,12 @@
     "devDependencies": {},
     "dependencies": {
         "knex": "0.21.18",
+        "pg": "^8.6.0",
+        "pg-connection-string": "^2.5.0",
         "sqlite3": "5.0.0",
         "strapi": "3.5.4",
         "strapi-admin": "3.5.3",
+        "strapi-connector-bookshelf": "^3.5.4",
         "strapi-connector-mongoose": "^3.5.4",
         "strapi-plugin-content-manager": "3.5.3",
         "strapi-plugin-content-type-builder": "3.5.3",
