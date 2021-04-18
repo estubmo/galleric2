@@ -43,7 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const products = await products_res.json();
 
     return {
-        paths: products.map((product: IProduct) => ({
+        paths: products?.map((product: IProduct) => ({
             params: { slug: String(product.slug) }
         })),
         fallback: false
