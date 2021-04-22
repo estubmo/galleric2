@@ -37,14 +37,6 @@ const Account: NextPage = () => {
                     }
                 )
             );
-            // const response = await logoutUser();
-            // console.log('response', response);
-            // if (response?.status === 200) {
-            //     console.log('response?.status', response?.status);
-            //     router.push('/');
-            //     console.log('router.push');
-            //     // mutateUser('/api/user', true);
-            // }
         } catch (error) {
             setErrorMessage(error.reponse.data.message);
         } finally {
@@ -70,7 +62,7 @@ const Account: NextPage = () => {
                     </motion.h2>
                     <motion.div className="mt-4" variants={childrenVariants}>
                         {user?.email}{' '}
-                        {user && !user.confirmed && (
+                        {user && !user.confirmed && !isLoading && (
                             <span className="ml-2 text-yellow-400">
                                 Please{' '}
                                 <Link href="/verify">

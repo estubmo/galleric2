@@ -59,7 +59,6 @@ export const VerificationCodeInput = ({
         const numbers = values.join('');
         if (numbers.length === fields) {
             if (type === 'number') {
-                console.log('numbers', numbers);
                 if (isNumeric(numbers)) onComplete(numbers);
             }
         }
@@ -77,7 +76,6 @@ export const VerificationCodeInput = ({
         const numbers = values.join('');
         if (numbers.length === fields) {
             if (type === 'number') {
-                console.log('numbers', numbers);
                 if (isNumeric(numbers)) onComplete(numbers);
             }
         }
@@ -128,7 +126,6 @@ export const VerificationCodeInput = ({
     };
 
     const handlePaste: React.ClipboardEventHandler<HTMLInputElement> = (e) => {
-        console.log(e.clipboardData.getData('text/plain'));
         const numericClipboardData = e.clipboardData.getData('text/plain').replace(/[^\d]/gi, '');
 
         if (isNumeric(numericClipboardData)) {

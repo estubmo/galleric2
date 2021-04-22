@@ -31,30 +31,26 @@ const Verify: NextPage = () => {
     }, [data]);
 
     const handleComplete = async (val: string) => {
-        console.log('val', val);
         setErrorMessage('');
         setIsLoading(true);
         try {
-            const response = await axios.post('/api/verify', {
+            await axios.post('/api/verify', {
                 email: data?.email,
                 confirmationToken: val
             });
-            console.log('response.data', response.data);
             setSuccessMessage(`Successfully verified ${data?.email}!`);
         } catch (error) {
-            console.log('error', error);
-            setIsLoading(false);
             setErrorMessage(error.response.data.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const handleResendEmail = async () => {
         try {
-            const response = await axios.post('/api/send-email-confirmation');
-            console.log('response.data', response.data);
+            await axios.post('/api/send-email-confirmation');
             setSuccessMessage('Resent verification email!');
         } catch (error) {
-            console.log('error', error);
             setIsLoading(false);
             setErrorMessage(error.response.data.message);
         }
@@ -81,16 +77,19 @@ const Verify: NextPage = () => {
                                     {' '}
                                     {data.email}
                                 </span>
-                                ! Please check your inbox for a verification link.
+                                ! Please check your inbox for a verification link. If you did not
+                                receive an email, try to
+                                <span
+                                    className="text-blue-600"
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={handleResendEmail}
+                                    onKeyPress={handleResendEmail}>
+                                    {' '}
+                                    resend email
+                                </span>
+                                .
                             </motion.div>
-                            <div
-                                className="text-blue-600"
-                                role="button"
-                                tabIndex={0}
-                                onClick={handleResendEmail}
-                                onKeyPress={handleResendEmail}>
-                                Resend email.
-                            </div>
                         </>
                     )}
                     {data && (
@@ -102,7 +101,6 @@ const Verify: NextPage = () => {
                                 type="number"
                                 fieldWidth={42}
                                 fieldHeight={42}
-                                // onChange={() => handleChange()}
                                 isLoading={isLoading}
                                 onComplete={(val) => handleComplete(val)}
                             />
