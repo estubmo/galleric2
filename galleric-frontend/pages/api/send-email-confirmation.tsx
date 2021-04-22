@@ -7,15 +7,18 @@ import { API_URL } from '../../utils/urls';
 
 export default withSession(async (req: NextApiRequestWithIronSession, res: NextApiResponse) => {
     const jwt = req.session.get('jwt');
-    console.log('jwt', jwt);
+    const user = req.session.get('user');
     if (jwt) {
         try {
             const headers = {
                 headers: { Authorization: `Bearer ${jwt}` }
             };
 
-            const response = await axios.post(`${API_URL}/auth/send-email-confirmation`, headers);
-            console.log('response', response);
+            const response = await axios.post(
+                `${API_URL}/auth/send-email-confirmation`,
+                { email: user.email },
+                headers
+            );
 
             res.json(response.data);
         } catch (error) {
