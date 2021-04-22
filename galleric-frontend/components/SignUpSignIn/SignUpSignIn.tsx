@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useAsyncSetState } from '../../lib/hooks';
 import useUser from '../../lib/useUser';
-import { childrenVariants, containerVariants, errorMessageVariant } from '../../utils/variants';
+import { childrenVariants, errorMessageVariant } from '../../utils/variants';
 import { PageWrapper } from '../PageWrapper';
 
 interface SignUpSignInProps {
@@ -36,10 +36,14 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
         setErrorMessage('');
     }, [email, sign]);
 
+    const setRedirectToAsync = async (path: string) => {
+        return await setRedirectTo(path);
+    };
+
     const handleSignIn = async () => {
         router.prefetch('/');
         try {
-            setRedirectTo('/');
+            await setRedirectToAsync('/');
             await mutateUser(
                 axios.post(
                     '/api/login',
@@ -54,12 +58,9 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
             );
         } catch (error) {
             setErrorMessage(error.response.data.message);
+        } finally {
             setIsLoading(false);
         }
-    };
-
-    const setRedirectToAsync = async (path: string) => {
-        return await setRedirectTo(path);
     };
 
     const handleSignUp = async () => {
@@ -75,6 +76,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                     password: password
                 })
             );
+            setIsLoading(false);
         } catch (error) {
             setErrorMessage(error.response.data.message);
             setIsLoading(false);
