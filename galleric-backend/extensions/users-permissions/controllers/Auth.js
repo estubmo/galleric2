@@ -84,18 +84,18 @@ module.exports = {
         );
       }
 
-      if (
-        _.get(await store.get({ key: "advanced" }), "email_confirmation") &&
-        user.confirmed !== true
-      ) {
-        return ctx.badRequest(
-          null,
-          formatError({
-            id: "Auth.form.error.confirmed",
-            message: "Your account email is not confirmed",
-          })
-        );
-      }
+      // if (
+      //   _.get(await store.get({ key: "advanced" }), "email_confirmation") &&
+      //   user.confirmed !== true
+      // ) {
+      //   return ctx.badRequest(
+      //     null,
+      //     formatError({
+      //       id: "Auth.form.error.confirmed",
+      //       message: "Your account email is not confirmed",
+      //     })
+      //   );
+      // }
 
       if (user.blocked === true) {
         return ctx.badRequest(
@@ -506,7 +506,6 @@ module.exports = {
       if (!settings.email_confirmation) {
         params.confirmed = true;
       }
-
       const user = await strapi
         .query("user", "users-permissions")
         .create(params);
@@ -521,6 +520,9 @@ module.exports = {
             "users-permissions"
           ].services.user.sendConfirmationEmail(user);
         } catch (err) {
+          // CUSTOM
+          await strapi.query("user", "users-permissions").delete(params);
+          // CUSTOM END
           return ctx.badRequest(null, err);
         }
 
@@ -594,7 +596,6 @@ module.exports = {
     const foundRole = await strapi
       .query("role", "users-permissions")
       .findOne({ name: process.env.UNCONFIRMED_ROLE_NAME }, []);
-    console.log("foundRole", foundRole);
     await userService.edit(
       { id: user.id },
       { confirmed: true, role: 1, confirmationToken: null }
@@ -626,7 +627,6 @@ module.exports = {
   },
 
   async sendEmailConfirmation(ctx) {
-    console.log("ctx", ctx);
     const params = _.assign(ctx.request.body);
 
     if (!params.email) {
