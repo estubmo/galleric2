@@ -178,7 +178,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                             />
                             <motion.label
                                 variants={childrenVariants}
-                                className="mt-4 text-xs uppercase"
+                                className="mt-4 text-sm uppercase"
                                 htmlFor="email">
                                 Password
                             </motion.label>
@@ -190,53 +190,62 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Password"
                             />
+                            <div className="flex items-center justify-between w-full">
+                                <motion.button
+                                    variants={childrenVariants}
+                                    className="mt-4 pl-4 pr-10 py-2 text-gray-100 focus-visible:underline font-light tracking-wider bg-gray-800 border-b border-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-wait uppercase"
+                                    whileHover={{ scale: isLoading ? 1 : 1.1 }}
+                                    disabled={isLoading}
+                                    type="submit">
+                                    Sign
+                                    <AnimatePresence>
+                                        {sign === 'in' && (
+                                            <motion.span
+                                                key="signInText"
+                                                className="absolute ml-1"
+                                                initial={{ y: '-20px', opacity: 0 }}
+                                                animate={{
+                                                    y: 0,
+                                                    opacity: 1,
+                                                    transition: { duration: 0.3 }
+                                                }}
+                                                exit={{
+                                                    y: '-20px',
+                                                    opacity: 0,
+                                                    transition: { duration: 0.3 }
+                                                }}>
+                                                {sign}
+                                            </motion.span>
+                                        )}
+                                        {sign === 'up' && (
+                                            <motion.span
+                                                key="signUpText"
+                                                className="absolute ml-1"
+                                                initial={{ y: '20px', opacity: 0 }}
+                                                animate={{
+                                                    y: 0,
+                                                    opacity: 1,
+                                                    transition: { duration: 0.3 }
+                                                }}
+                                                exit={{
+                                                    y: '20px',
+                                                    opacity: 0,
+                                                    transition: { duration: 0.3 }
+                                                }}>
+                                                {sign}
+                                            </motion.span>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.button>
+                                <motion.span variants={childrenVariants}>
+                                    <Link href="/forgot-password">
+                                        <a className="text-blue-600 hover:underline focus-visible:underline focus:outline-none">
+                                            Forgotten password?
+                                        </a>
+                                    </Link>
+                                </motion.span>
+                            </div>
 
-                            <motion.button
-                                variants={childrenVariants}
-                                className="mt-4 pl-4 pr-10 py-2 text-gray-100 focus-visible:underline font-light tracking-wider bg-gray-800 border-b border-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-wait uppercase"
-                                whileHover={{ scale: isLoading ? 1 : 1.1 }}
-                                disabled={isLoading}
-                                type="submit">
-                                Sign
-                                <AnimatePresence>
-                                    {sign === 'in' && (
-                                        <motion.span
-                                            key="signInText"
-                                            className="absolute ml-1"
-                                            initial={{ y: '-20px', opacity: 0 }}
-                                            animate={{
-                                                y: 0,
-                                                opacity: 1,
-                                                transition: { duration: 0.3 }
-                                            }}
-                                            exit={{
-                                                y: '-20px',
-                                                opacity: 0,
-                                                transition: { duration: 0.3 }
-                                            }}>
-                                            {sign}
-                                        </motion.span>
-                                    )}
-                                    {sign === 'up' && (
-                                        <motion.span
-                                            key="signUpText"
-                                            className="absolute ml-1"
-                                            initial={{ y: '20px', opacity: 0 }}
-                                            animate={{
-                                                y: 0,
-                                                opacity: 1,
-                                                transition: { duration: 0.3 }
-                                            }}
-                                            exit={{
-                                                y: '20px',
-                                                opacity: 0,
-                                                transition: { duration: 0.3 }
-                                            }}>
-                                            {sign}
-                                        </motion.span>
-                                    )}
-                                </AnimatePresence>
-                            </motion.button>
                             {isLoading && <span>Loading...</span>}
                             {errorMessage && (
                                 <motion.p
