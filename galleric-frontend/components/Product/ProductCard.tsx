@@ -6,6 +6,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { formatCurrencyString } from 'use-shopping-cart';
 
 import { IProduct } from '../../model/product';
+import { CloseButton } from '../CloseButton';
 import { MenuButton } from '../MenuButton';
 import { ProductImage } from './ProductImage';
 import { ProductImageSelector } from './ProductImageSelector';
@@ -43,11 +44,10 @@ export const ProductCard = ({ product, isModal = false }: ProductCardProps): JSX
                         <div className="relative">
                             <div className="absolute right-0 top-0">
                                 {isModal && (
-                                    <button
-                                        className="flex items-center justify-center m-2 w-8 h-8 text-gray-900 focus-visible:underline focus:outline-none cursor-pointer"
-                                        onClick={() => router.back()}>
-                                        <MenuButton isOpen={true} />
-                                    </button>
+                                    <CloseButton
+                                        className="m-2 text-gray-100 focus-visible:underline focus:outline-none cursor-pointer"
+                                        close={() => router.back()}
+                                    />
                                 )}
                             </div>
 

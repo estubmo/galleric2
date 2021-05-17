@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import useUser from '../lib/useUser';
 import Cart from './Cart';
 import CartSummary from './CartSummary';
+import { CloseButton } from './CloseButton';
 import Menu from './Menu';
 import Modal from './Modal';
 import NavBarAccountButton from './NavBarAccountButton';
@@ -49,9 +50,15 @@ const NavBar = (): JSX.Element => {
             <Modal showModal={!!router.query.openCart} fromPath={router.pathname}>
                 <div className="z-40 flex flex-col m-8 p-4 bg-gray-900 rounded-xl">
                     <Cart>
-                        <>
+                        <div className="relative">
+                            <div className="absolute right-0 top-0">
+                                <CloseButton
+                                    className="text-gray-100 focus-visible:underline focus:outline-none cursor-pointer"
+                                    close={() => router.back()}
+                                />
+                            </div>
                             <CartSummary />
-                        </>
+                        </div>
                     </Cart>
                 </div>
             </Modal>

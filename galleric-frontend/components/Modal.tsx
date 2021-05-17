@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useViewportScroll } from 'framer-motion';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 type Props = {
     showModal: boolean;
@@ -21,6 +21,20 @@ const Modal = ({ showModal, children, fromPath }: Props): JSX.Element => {
     const router = useRouter();
     const [showModalState, setShowModalState] = useState(showModal);
     const { scrollY } = useViewportScroll();
+
+    const handleKeyDown = useCallback(
+        (e: KeyboardEvent) => {
+            if (e.key === 'Escape' || e.key === 'Esc') router.push(fromPath);
+        },
+        [fromPath, router]
+    );
+
+    React.useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [handleKeyDown]);
 
     useEffect(() => {
         document.body.style.overflow = showModal ? 'hidden' : 'unset';
@@ -44,9 +58,6 @@ const Modal = ({ showModal, children, fromPath }: Props): JSX.Element => {
                     exit="hidden"
                     variants={variants}
                     onClick={handleClick}
-                    onKeyPress={(e) => {
-                        e.key === ('Esc' || 'Escape') && console.log('ESC CLICKED'); //TODO: Add window listener with useEffect
-                    }}
                     role="button"
                     tabIndex={0}>
                     <div className="fixed z-30" style={{ top: scrollY.get() }}>
