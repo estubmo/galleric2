@@ -8,7 +8,7 @@ module.exports = {
             jsx: true
         }
     },
-    plugins: ['simple-import-sort', 'import'],
+    plugins: ['prettier', 'simple-import-sort', 'import'],
     settings: {
         react: {
             version: 'detect'
@@ -27,8 +27,7 @@ module.exports = {
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'prettier/@typescript-eslint',
-        'plugin:prettier/recommended' // Make this the last element so prettier config overrides other formatting rules
+        'prettier'
     ],
     rules: {
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
