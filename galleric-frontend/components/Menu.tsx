@@ -1,3 +1,4 @@
+import FocusTrap from 'focus-trap-react';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -52,10 +53,10 @@ const Menu = (): JSX.Element => {
 
     return (
         <>
-            <div className="w-0 h-0 invisible md:w-auto md:h-8 md:visible">
+            <div className="invisible w-0 h-0 md:w-auto md:h-8 md:visible">
                 <motion.div
                     style={{ originX: '50%', originY: 0 }}
-                    className="flex items-start justify-between mt-4 w-full text-gray-100 text-lg font-bold"
+                    className="flex items-start justify-between w-full mt-4 text-lg font-bold text-gray-100"
                     variants={childVariants}>
                     <AnimateSharedLayout type="crossfade">
                         {routes.map((route) => (
@@ -70,32 +71,36 @@ const Menu = (): JSX.Element => {
                 </motion.div>
             </div>
             <div className="flex flex-col items-center justify-center h-auto md:h-0 md:invisible">
-                <NavBarHamburgerButton isOpen={open} onClick={handleSetOpen} />
-
                 <AnimatePresence exitBeforeEnter>
-                    {open && (
-                        <motion.div
-                            initial="hidden"
-                            animate="visible"
-                            exit="hidden"
-                            variants={variants}
-                            className="fixed z-10 inset-0 w-full h-screen bg-gray-900">
-                            <motion.div
-                                style={{ originX: '50%', originY: 0 }}
-                                className="flex flex-col items-center justify-between mt-14 w-full text-gray-100 text-2xl font-bold"
-                                variants={childVariants}>
-                                {routes.map((route) => (
-                                    <NavBarLink
-                                        className="mt-2"
-                                        key={route.name}
-                                        route={route}
-                                        active={pathname === route.path}
-                                        onClick={handleSetOpen}
-                                    />
-                                ))}
-                            </motion.div>
-                        </motion.div>
-                    )}
+                    <div key="MenuBar">
+                        <NavBarHamburgerButton isOpen={open} onClick={handleSetOpen} />
+                        {/* TODO: This should be part of focus-trap, but can't right now due to a bug */}
+                        <FocusTrap>
+                            {open && (
+                                <motion.div
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="hidden"
+                                    variants={variants}
+                                    className="fixed inset-0 z-10 w-full h-screen bg-gray-900">
+                                    <motion.div
+                                        style={{ originX: '50%', originY: 0 }}
+                                        className="flex flex-col items-center justify-between w-full text-2xl font-bold text-gray-100 mt-14"
+                                        variants={childVariants}>
+                                        {routes.map((route) => (
+                                            <NavBarLink
+                                                className="mt-2"
+                                                key={route.name}
+                                                route={route}
+                                                active={pathname === route.path}
+                                                onClick={handleSetOpen}
+                                            />
+                                        ))}
+                                    </motion.div>
+                                </motion.div>
+                            )}
+                        </FocusTrap>
+                    </div>
                 </AnimatePresence>
             </div>
         </>

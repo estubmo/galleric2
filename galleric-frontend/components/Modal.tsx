@@ -1,3 +1,4 @@
+import FocusTrap from 'focus-trap-react';
 import { AnimatePresence, motion, useViewportScroll } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -51,19 +52,21 @@ const Modal = ({ showModal, children, fromPath }: Props): JSX.Element => {
     return (
         <AnimatePresence exitBeforeEnter>
             {showModalState && (
-                <motion.div
-                    className="overlay flex justify-center cursor-default"
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    variants={variants}
-                    onClick={handleClick}
-                    role="button"
-                    tabIndex={0}>
-                    <div className="fixed z-30" style={{ top: scrollY.get() }}>
-                        {children}
-                    </div>
-                </motion.div>
+                <FocusTrap>
+                    <motion.div
+                        className="overlay flex justify-center cursor-default"
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        variants={variants}
+                        onClick={handleClick}
+                        role="button"
+                        tabIndex={0}>
+                        <div className="fixed z-30" style={{ top: scrollY.get() }}>
+                            {children}
+                        </div>
+                    </motion.div>
+                </FocusTrap>
             )}
         </AnimatePresence>
     );

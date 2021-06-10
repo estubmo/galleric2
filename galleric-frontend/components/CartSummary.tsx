@@ -7,13 +7,8 @@ import { fetchPostJSON } from '../utils/api-helpers';
 const CartSummary = (): JSX.Element => {
     const [loading, setLoading] = useState(false);
     const [cartEmpty, setCartEmpty] = useState(true);
-    const {
-        formattedTotalPrice,
-        cartCount,
-        clearCart,
-        cartDetails,
-        redirectToCheckout
-    } = useShoppingCart();
+    const { formattedTotalPrice, cartCount, clearCart, cartDetails, redirectToCheckout } =
+        useShoppingCart();
 
     useEffect(() => setCartEmpty(!cartCount), [cartCount]);
 
