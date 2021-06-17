@@ -44,6 +44,10 @@
       "enum": ["USD", "EUR", "NOK"],
       "default": "EUR",
       "required": true
+    },
+    "orders": {
+      "via": "product",
+      "collection": "order"
     }
   }
 }
