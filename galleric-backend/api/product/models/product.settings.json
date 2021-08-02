@@ -17,11 +17,7 @@
     "images": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": [
-        "files",
-        "images",
-        "videos"
-      ],
+      "allowedTypes": ["files", "images", "videos"],
       "plugin": "upload",
       "required": true,
       "pluginOptions": {}
@@ -46,11 +42,7 @@
     },
     "currency": {
       "type": "enumeration",
-      "enum": [
-        "USD",
-        "EUR",
-        "NOK"
-      ],
+      "enum": ["USD", "EUR", "NOK"],
       "default": "EUR",
       "required": true
     },
