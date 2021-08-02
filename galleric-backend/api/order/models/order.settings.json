@@ -12,7 +12,10 @@
   "attributes": {
     "status": {
       "type": "enumeration",
-      "enum": ["paid", "unpaid"]
+      "enum": [
+        "paid",
+        "unpaid"
+      ]
     },
     "total": {
       "type": "decimal"
@@ -21,8 +24,8 @@
       "type": "string"
     },
     "product": {
-      "model": "product",
-      "via": "orders"
+      "via": "orders",
+      "model": "product"
     },
     "user": {
       "plugin": "users-permissions",

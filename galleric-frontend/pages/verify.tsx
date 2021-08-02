@@ -62,18 +62,18 @@ const Verify: NextPage = () => {
                 <title>Galleric | Verify Email</title>
                 <meta name="description" content="Verify Email" />
             </Head>
-            <PageWrapper>
-                <div className="flex flex-col items-center px-4 h-60v text-xs sm:w-3/4 sm:text-base">
+            <PageWrapper className="items-center justify-center">
+                <div className="flex flex-col items-center px-4 text-xs h-60v sm:w-3/4 sm:text-base">
                     {data && data.email && (
                         <>
                             <motion.h2
-                                className="text-gray-400 text-4xl font-thin tracking-widest"
+                                className="text-4xl font-thin tracking-widest text-gray-400"
                                 variants={childrenVariants}>
                                 Verification
                             </motion.h2>
                             <motion.div variants={childrenVariants} className="mt-4">
                                 We sent an email to{' '}
-                                <span className="ml-1 text-yellow-400 font-mono">
+                                <span className="ml-1 font-mono text-yellow-400">
                                     {' '}
                                     {data.email}
                                 </span>

@@ -17,9 +17,14 @@
     "images": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": ["files", "images", "videos"],
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
       "plugin": "upload",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "content": {
       "type": "richtext"
@@ -41,13 +46,20 @@
     },
     "currency": {
       "type": "enumeration",
-      "enum": ["USD", "EUR", "NOK"],
+      "enum": [
+        "USD",
+        "EUR",
+        "NOK"
+      ],
       "default": "EUR",
       "required": true
     },
     "orders": {
       "via": "product",
       "collection": "order"
+    },
+    "discount": {
+      "type": "decimal"
     }
   }
 }

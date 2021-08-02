@@ -104,18 +104,18 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                 <title>Galleric | Sign {sign}</title>
                 <meta name="description" content={`Sign ${sign}`} />
             </Head>
-            <PageWrapper>
+            <PageWrapper className="items-center justify-center">
                 <AnimateSharedLayout type="crossfade">
                     <AnimatePresence exitBeforeEnter>
                         <motion.form
-                            className="flex flex-col items-start max-w-lg h-50v font-light tracking-widest md:w-2/3"
+                            className="flex flex-col items-start max-w-lg font-light tracking-widest h-50v md:w-2/3"
                             onSubmit={handleSubmit}
                             key="signInUpForm">
                             <motion.h2
                                 variants={childrenVariants}
-                                className="flex text-gray-400 text-4xl">
+                                className="flex text-4xl text-gray-400">
                                 <Link href="/sign?sign=in" as="/signin" passHref>
-                                    <div className="focus-visible:underline font-thin tracking-widest focus:outline-none cursor-pointer">
+                                    <div className="font-thin tracking-widest cursor-pointer focus-visible:underline focus:outline-none">
                                         <a>
                                             <motion.div
                                                 className={clsx('', {
@@ -138,7 +138,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                 </Link>
                                 <div className="mx-4 font-thin tracking-widest">or</div>
                                 <Link href="/sign?sign=up" as="/signup" passHref>
-                                    <div className="focus-visible:underline font-thin tracking-widest focus:outline-none cursor-pointer">
+                                    <div className="font-thin tracking-widest cursor-pointer focus-visible:underline focus:outline-none">
                                         <a>
                                             <motion.div
                                                 className={clsx('', {
@@ -169,7 +169,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                             </motion.label>
                             <motion.input
                                 variants={childrenVariants}
-                                className="placeholder-gray-600 autofill:text-fill-gray-200 autofill:shadow-fill-gray-900 py-2 w-full text-gray-200 bg-transparent focus:bg-transparent border-0 border-b hover:border-gray-100 focus:border-gray-100 border-gray-400 focus:outline-none"
+                                className="w-full py-2 text-gray-200 placeholder-gray-600 bg-transparent border-0 border-b border-gray-400 autofill:text-fill-gray-200 autofill:shadow-fill-gray-900 focus:bg-transparent hover:border-gray-100 focus:border-gray-100 focus:outline-none"
                                 id="email"
                                 type="email"
                                 value={email}
@@ -184,7 +184,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                             </motion.label>
                             <motion.input
                                 variants={childrenVariants}
-                                className="placeholder-gray-600 autofill:text-fill-gray-200 autofill:shadow-fill-gray-900 py-2 w-full text-gray-200 bg-transparent focus:bg-transparent border-0 border-b hover:border-gray-100 focus:border-gray-100 border-gray-400 focus:outline-none"
+                                className="w-full py-2 text-gray-200 placeholder-gray-600 bg-transparent border-0 border-b border-gray-400 autofill:text-fill-gray-200 autofill:shadow-fill-gray-900 focus:bg-transparent hover:border-gray-100 focus:border-gray-100 focus:outline-none"
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -193,7 +193,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                             <div className="flex items-center justify-between w-full">
                                 <motion.button
                                     variants={childrenVariants}
-                                    className="mt-4 pl-4 pr-10 py-2 text-gray-100 focus-visible:underline font-light tracking-wider bg-gray-800 border-b border-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-wait uppercase"
+                                    className="py-2 pl-4 pr-10 mt-4 font-light tracking-wider text-gray-100 uppercase bg-gray-800 border-b border-gray-400 focus-visible:underline focus:outline-none disabled:opacity-50 disabled:cursor-wait"
                                     whileHover={{ scale: isLoading ? 1 : 1.1 }}
                                     disabled={isLoading}
                                     type="submit">

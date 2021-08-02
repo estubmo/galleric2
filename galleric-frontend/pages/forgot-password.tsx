@@ -33,10 +33,10 @@ const ForgotPassword: NextPage = () => {
                 <title>Galleric | Forgot Password</title>
                 <meta name="description" content="Reset Password" />
             </Head>
-            <PageWrapper>
-                <motion.div className="flex flex-col items-start px-2 max-w-lg h-50v font-light tracking-widest md:w-1/2">
+            <PageWrapper className="items-center justify-center">
+                <motion.div className="flex flex-col items-start max-w-lg px-2 font-light tracking-widest h-50v md:w-1/2">
                     <motion.h2
-                        className="mt-4 text-gray-400 text-4xl font-thin"
+                        className="mt-4 text-4xl font-thin text-gray-400"
                         variants={childrenVariants}>
                         Forgotten Your Password?
                     </motion.h2>
@@ -51,7 +51,7 @@ const ForgotPassword: NextPage = () => {
                     </motion.label>
                     <motion.input
                         variants={childrenVariants}
-                        className="placeholder-gray-600 autofill:text-fill-gray-200 autofill:shadow-fill-gray-900 py-2 w-full text-gray-200 bg-transparent focus:bg-transparent border-0 border-b hover:border-gray-100 focus:border-gray-100 border-gray-400 focus:outline-none"
+                        className="w-full py-2 text-gray-200 placeholder-gray-600 bg-transparent border-0 border-b border-gray-400 autofill:text-fill-gray-200 autofill:shadow-fill-gray-900 focus:bg-transparent hover:border-gray-100 focus:border-gray-100 focus:outline-none"
                         id="email"
                         type="email"
                         value={email}
@@ -63,7 +63,7 @@ const ForgotPassword: NextPage = () => {
                         placeholder="Your email address goes here"
                     />
                     <motion.button
-                        className="mt-4 px-4 py-2 text-gray-100 focus-visible:underline font-light tracking-wider bg-gray-800 border-b border-gray-400 focus:outline-none uppercase"
+                        className="px-4 py-2 mt-4 font-light tracking-wider text-gray-100 uppercase bg-gray-800 border-b border-gray-400 focus-visible:underline focus:outline-none"
                         whileHover={{ scale: isSending || isSentSuccessful ? 1 : 1.1 }}
                         disabled={isSending || isSentSuccessful}
                         variants={childrenVariants}

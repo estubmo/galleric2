@@ -3,6 +3,8 @@ import React from 'react';
 export const PreloadImages = (): JSX.Element => {
     return (
         <div style={{ display: 'none' }}>
+            <img src="/images/20201010_112636.jpg" width="1" height="1" alt="test 01" />
+            <img src="/images/20201010_112712.jpg" width="1" height="1" alt="test 02" />
             <img src="/images/wall_picture_200418_090400.png" width="1" height="1" alt="wall 01" />
             <img src="/images/wall_picture_203009_113025.png" width="1" height="1" alt="wall 02" />
             <img src="/images/wall_picture_203409_073436.png" width="1" height="1" alt="wall 03" />

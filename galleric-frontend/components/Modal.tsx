@@ -52,21 +52,19 @@ const Modal = ({ showModal, children, fromPath }: Props): JSX.Element => {
     return (
         <AnimatePresence exitBeforeEnter>
             {showModalState && (
-                <FocusTrap>
-                    <motion.div
-                        className="overlay flex justify-center cursor-default"
-                        initial="hidden"
-                        animate="visible"
-                        exit="hidden"
-                        variants={variants}
-                        onClick={handleClick}
-                        role="button"
-                        tabIndex={0}>
-                        <div className="fixed z-30" style={{ top: scrollY.get() }}>
-                            {children}
-                        </div>
-                    </motion.div>
-                </FocusTrap>
+                <motion.div
+                    className="flex justify-center cursor-default overlay"
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={variants}
+                    onClick={handleClick}
+                    role="button"
+                    tabIndex={0}>
+                    <div className="fixed z-30" style={{ top: scrollY.get() }}>
+                        {children}
+                    </div>
+                </motion.div>
             )}
         </AnimatePresence>
     );

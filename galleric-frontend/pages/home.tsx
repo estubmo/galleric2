@@ -1,23 +1,13 @@
-import { motion } from 'framer-motion';
 import React from 'react';
 
+import { PageWrapper } from '../components/PageWrapper';
 import Stub from '../components/Stub';
 import Svanhild from '../components/Svanhild';
 
 const Home = (): JSX.Element => {
     return (
-        <motion.div
-            layout
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{
-                opacity: 0,
-                transition: {
-                    duration: 1
-                }
-            }}
-            className="flex flex-col items-center justify-center w-full h-auto bg-gray-900">
-            <div className="mx-24 w-full max-w-screen-xl">
+        <PageWrapper className="bg-gray-800">
+            <div className="w-full max-w-screen-xl mx-24">
                 <div className="flex flex-col">
                     <div className="relative">
                         <Svanhild
@@ -31,10 +21,7 @@ const Home = (): JSX.Element => {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-screen bg-green-800"></div>
-            <div className="w-full h-screen bg-blue-800"></div>
-            <div className="w-full h-screen bg-blue-800"></div>
-        </motion.div>
+        </PageWrapper>
     );
 };
 

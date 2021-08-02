@@ -1,6 +1,9 @@
 import { motion, useSpring, useTransform, useViewportScroll } from 'framer-motion';
+import Image from 'next/image';
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import { PageWrapper } from '../components/PageWrapper';
 
 const Exhibitions = (): JSX.Element => {
     const { scrollY, scrollYProgress } = useViewportScroll();
@@ -26,33 +29,31 @@ const Exhibitions = (): JSX.Element => {
         triggerOnce: false
     });
     return (
-        <div className="flex flex-col bg-gray-900">
-            <motion.div
-                className="mt-14 w-48 h-48 bg-red-200 rounded"
-                style={{ y: y1Spring, x: 150 }}
-            />
-            <motion.div className="w-48 h-48 bg-green-200 rounded" style={{ y: y2Spring, x: 50 }} />
-            <motion.div className="relative flex items-center justify-center w-full h-screen bg-blue-300 overflow-hidden">
-                <motion.img
-                    variants={variants}
-                    initial="hidden"
-                    animate="visible"
-                    className="absolute min-h-screen object-cover"
-                    src="/images/wall_picture_203409_073436.png"
-                    style={{ scale: scaleSpring }}
-                />
-            </motion.div>
-            <div style={{ height: 500 }} />
-            <div style={{ top: 0, left: 0 }}> {'is in view? ' + inView}</div>
-            <motion.div className="mt-72 w-48 h-48 bg-green-200 rounded" />
-            <motion.div
-                animate={inView ? 'visible' : 'hidden'}
-                variants={variants}
-                transition={{ duration: 2, ease: 'easeOut' }}
-                ref={ref}
-                className="magic"
-            />
-        </div>
+        <PageWrapper>
+            <div className="flex flex-col w-full bg-gray-900">
+                <motion.div
+                    className="object-cover w-48 h-48 bg-red-200 rounded mt-14"
+                    style={{ y: y1Spring, x: 150 }}>
+                    <Image src="/images/20201010_112636.jpg" layout="fill" objectFit="none" />
+                </motion.div>
+                <motion.div
+                    className="object-cover w-48 h-48 bg-green-200 rounded"
+                    style={{ y: y2Spring, x: 50 }}>
+                    <Image src="/images/20201010_112712.jpg" layout="fill" objectFit="none" />
+                </motion.div>
+                <motion.div className="relative z-0 flex items-center justify-center w-full h-screen overflow-hidden bg-blue-300">
+                    <motion.img
+                        variants={variants}
+                        initial="hidden"
+                        animate="visible"
+                        className="absolute object-cover min-h-screen"
+                        src="/images/wall_picture_203409_073436.png"
+                        style={{ scale: scaleSpring }}
+                    />
+                </motion.div>
+                <div style={{ height: 500 }} />
+            </div>
+        </PageWrapper>
     );
 };
 
