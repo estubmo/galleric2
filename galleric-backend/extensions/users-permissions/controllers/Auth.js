@@ -12,7 +12,8 @@ const _ = require("lodash");
 const grant = require("grant-koa");
 const { sanitizeEntity } = require("strapi-utils");
 
-const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegExp =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const formatError = (error) => [
   {
     messages: [{ id: error.id, message: error.message, field: error.field }],
@@ -268,14 +269,22 @@ module.exports = {
     // Ability to pass OAuth callback dynamically
     grantConfig[provider].callback =
       _.get(ctx, "query.callback") || grantConfig[provider].callback;
-    grantConfig[provider].redirect_uri = strapi.plugins[
-      "users-permissions"
-    ].services.providers.buildRedirectUri(provider);
+    grantConfig[provider].redirect_uri =
+      strapi.plugins["users-permissions"].services.providers.buildRedirectUri(
+        provider
+      );
 
     return grant(grantConfig)(ctx, next);
   },
 
   async forgotPassword(ctx) {
+    console.log(
+      "%cRetNemt%cline:280%cctx",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+      ctx
+    );
     let { email } = ctx.request.body;
 
     // Check if the provided email is valid or not.
@@ -567,15 +576,15 @@ module.exports = {
 
     ctx.body = {
       ...user,
+      confirmationToken: null,
     };
   },
 
   async emailConfirmation(ctx, next, returnUser) {
     const { email, confirmation: confirmationToken } = ctx.query;
 
-    const { user: userService, jwt: jwtService } = strapi.plugins[
-      "users-permissions"
-    ].services;
+    const { user: userService, jwt: jwtService } =
+      strapi.plugins["users-permissions"].services;
 
     if (_.isEmpty(email)) {
       return ctx.badRequest("email.invalid");

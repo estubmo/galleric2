@@ -38,7 +38,7 @@ const Verify: NextPage = () => {
                 email: data?.email,
                 confirmationToken: val
             });
-            setSuccessMessage(`Successfully verified ${data?.email}!`);
+            setSuccessMessage(`Successfully verified ${data?.email}! Redirecting...`);
         } catch (error) {
             setErrorMessage(error.response.data.message);
         } finally {
@@ -78,14 +78,13 @@ const Verify: NextPage = () => {
                                     {data.email}
                                 </span>
                                 ! Please check your inbox for a verification link. If you did not
-                                receive an email, try to
+                                receive an email, try to{' '}
                                 <span
                                     className="text-blue-600 hover:underline focus-visible:underline focus:outline-none"
                                     role="button"
                                     tabIndex={0}
                                     onClick={handleResendEmail}
                                     onKeyPress={handleResendEmail}>
-                                    {' '}
                                     resend email
                                 </span>
                                 .
