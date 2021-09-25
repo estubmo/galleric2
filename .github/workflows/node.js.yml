@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - "galleric-backend/**"
-      - ".github/workflows/auth.yaml"
+      - ".github/workflows/node.js.yml"
     branches: [ master ]
   pull_request:
     branches: [ master ]
