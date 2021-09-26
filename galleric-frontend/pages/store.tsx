@@ -76,7 +76,7 @@ const Store = ({ products }: IProducts): JSX.Element => {
 export const getStaticProps: GetStaticProps = async (context) => {
     const res = await axios.get(`${API_URL}/products/`);
     const products = res.data;
-    return { props: { products } };
+    return { props: { products }, revalidate: 60 };
 };
 
 export default Store;
