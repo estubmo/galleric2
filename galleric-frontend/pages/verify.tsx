@@ -11,7 +11,8 @@ import { VerificationCodeInput } from '../components/VerificationCodeInput';
 import { childrenVariants, errorMessageVariant } from '../utils/variants';
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-
+//TODO: add helpers for error messages and fallbacks
+//TODO: Handle token.invalid
 const Verify: NextPage = () => {
     const [refreshInterval, setRefreshInterval] = useState<number>(5000);
     const [errorMessage, setErrorMessage] = useState('');

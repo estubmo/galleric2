@@ -9,6 +9,8 @@ import Menu from './Menu';
 import Modal from './Modal';
 import NavBarAccountButton from './NavBarAccountButton';
 import NavBarCartButton from './NavBarCartButton';
+import Stub from './Stub';
+import Svanhild from './Svanhild';
 
 interface Links {
     href: string;
@@ -35,7 +37,18 @@ const NavBar = (): JSX.Element => {
     return (
         <>
             <nav className="fixed z-20 flex items-start justify-between w-full h-auto">
-                <div className="flex-1"></div>
+                <div className="flex-1">
+                    <div className="relative">
+                        <Svanhild
+                            containerClassName="left-0 top-0 p-4 text-gray-100 absolute"
+                            svgClassName="h-6 md:h-10 fill-current stroke-current"
+                        />
+                        <Stub
+                            containerClassName="left-0 top-8 p-4 text-gray-100 absolute"
+                            svgClassName="h-6 md:h-10 fill-current stroke-current"
+                        />
+                    </div>
+                </div>
 
                 <div className="flex-none">
                     <Menu />
@@ -48,12 +61,12 @@ const NavBar = (): JSX.Element => {
                 </div>
             </nav>
             <Modal showModal={!!router.query.openCart} fromPath={router.pathname}>
-                <div className="z-40 flex flex-col m-8 p-4 bg-gray-900 rounded-xl">
+                <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 rounded-xl">
                     <Cart>
                         <div className="relative">
-                            <div className="absolute right-0 top-0">
+                            <div className="absolute top-0 right-0">
                                 <CloseButton
-                                    className="text-gray-100 focus-visible:underline focus:outline-none cursor-pointer"
+                                    className="text-gray-100 cursor-pointer focus-visible:underline focus:outline-none"
                                     close={() => router.back()}
                                 />
                             </div>
