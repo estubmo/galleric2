@@ -22,7 +22,7 @@ export const ProductImageSelector = ({
                 return (
                     <button
                         className="focus-visible:underline focus:outline-none"
-                        key={'product-image-' + image.name}
+                        key={'product-image-' + image.id}
                         onClick={() => setSelectedImage(image)}>
                         <motion.img
                             className={clsx(

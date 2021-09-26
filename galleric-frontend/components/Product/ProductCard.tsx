@@ -14,9 +14,14 @@ import { ProductImageSelector } from './ProductImageSelector';
 interface ProductCardProps {
     product: IProduct;
     isModal?: boolean;
+    returnHref?: string;
 }
 
-export const ProductCard = ({ product, isModal = false }: ProductCardProps): JSX.Element => {
+export const ProductCard = ({
+    product,
+    isModal = false,
+    returnHref = ''
+}: ProductCardProps): JSX.Element => {
     const [selectedImage, setSelectedImage] = useState(product.images[0]);
     const router = useRouter();
 
@@ -24,7 +29,7 @@ export const ProductCard = ({ product, isModal = false }: ProductCardProps): JSX
         <>
             {product && (
                 <motion.div
-                    className="relative m-2 mt-24 w-100v h-100v text-gray-100 bg-gray-800 overflow-hidden md:w-60v md:h-80v"
+                    className="relative m-2 mt-24 overflow-hidden text-gray-100 bg-gray-800 w-100v h-100v md:w-60v md:h-80v"
                     layoutId={`product-container-${product.slug}`}>
                     <PerfectScrollbar
                         options={{ wheelPropagation: false }}
@@ -42,11 +47,16 @@ export const ProductCard = ({ product, isModal = false }: ProductCardProps): JSX
                             }
                         }}>
                         <div className="relative">
-                            <div className="absolute right-0 top-0">
+                            <div className="absolute top-0 right-0">
                                 {isModal && (
                                     <CloseButton
-                                        className="m-2 text-gray-100 focus-visible:underline focus:outline-none cursor-pointer"
-                                        close={() => router.back()}
+                                        className="m-2 text-gray-100 cursor-pointer focus-visible:underline focus:outline-none"
+                                        close={() =>
+                                            router.push(returnHref, undefined, {
+                                                shallow: true,
+                                                scroll: false
+                                            })
+                                        }
                                     />
                                 )}
                             </div>
@@ -76,7 +86,7 @@ export const ProductCard = ({ product, isModal = false }: ProductCardProps): JSX
                                     </motion.p>
                                 </div>
                             </div>
-                            <div className="mb-14 p-4 font-extralight">
+                            <div className="p-4 mb-14 font-extralight">
                                 <ReactMarkdown>{product.content}</ReactMarkdown>
                             </div>
                         </div>

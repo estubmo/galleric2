@@ -60,7 +60,7 @@ const NavBar = (): JSX.Element => {
                     </div>
                 </div>
             </nav>
-            <Modal showModal={!!router.query.openCart} fromPath={router.pathname}>
+            <Modal showModal={!!router.query.openCart} returnHref={router.pathname}>
                 <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 rounded-xl">
                     <Cart>
                         <div className="relative">

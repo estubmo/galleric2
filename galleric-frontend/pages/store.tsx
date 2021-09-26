@@ -29,20 +29,20 @@ const Store = ({ products }: IProducts): JSX.Element => {
                         animate="visible"
                         exit="exit"
                         variants={containerVariants}
-                        className="flex flex-col m-14 p-4 w-full max-w-screen-2xl">
+                        className="flex flex-col w-full p-4 m-14 max-w-screen-2xl">
                         <motion.h1
                             className="text-4xl font-bold tracking-wider"
                             variants={childrenVariants}>
                             Welcome to the store
                         </motion.h1>
                         <motion.h2
-                            className="text-gray-200 italic font-light tracking-widest"
+                            className="italic font-light tracking-widest text-gray-200"
                             variants={childrenVariants}>
                             This is a subtitle explaining why what and how this page is used
                         </motion.h2>
 
                         <motion.p
-                            className="clear-none mt-4 font-extralight tracking-wider leading-6"
+                            className="clear-none mt-4 leading-6 tracking-wider font-extralight"
                             variants={childrenVariants}>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus
                             delectus excepturi numquam atque officia porro quas vitae? Dolorem
@@ -65,8 +65,8 @@ const Store = ({ products }: IProducts): JSX.Element => {
                         </motion.div>
                     </motion.div>
                 </div>
-                <Modal showModal={!!router.query.product} fromPath={router.pathname}>
-                    <ProductCard product={selectedProduct} isModal />
+                <Modal showModal={!!router.query.product} returnHref={router.pathname}>
+                    <ProductCard product={selectedProduct} isModal returnHref={router.pathname} />
                 </Modal>
             </AnimateSharedLayout>
         </>

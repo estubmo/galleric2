@@ -6,7 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 type Props = {
     showModal: boolean;
     children: React.ReactNode;
-    fromPath: string;
+    returnHref: string;
 };
 
 const variants = {
@@ -18,16 +18,17 @@ const variants = {
     }
 };
 
-const Modal = ({ showModal, children, fromPath }: Props): JSX.Element => {
+const Modal = ({ showModal, children, returnHref }: Props): JSX.Element => {
     const router = useRouter();
     const [showModalState, setShowModalState] = useState(showModal);
     const { scrollY } = useViewportScroll();
 
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
-            if (e.key === 'Escape' || e.key === 'Esc') router.push(fromPath);
+            if (e.key === 'Escape' || e.key === 'Esc')
+                router.push(returnHref, undefined, { scroll: false });
         },
-        [fromPath, router]
+        [returnHref, router]
     );
 
     React.useEffect(() => {
@@ -46,7 +47,7 @@ const Modal = ({ showModal, children, fromPath }: Props): JSX.Element => {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
         if (e.target === e.currentTarget) {
-            router.push(fromPath);
+            router.push(returnHref, undefined, { scroll: false });
         }
     };
     return (
