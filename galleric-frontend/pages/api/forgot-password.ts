@@ -14,11 +14,9 @@ export default withSession(async (req: NextApiRequestWithIronSession, res: NextA
 
         res.json(response.data);
     } catch (error) {
-        if (error instanceof Error) {
-            res.status(error.response?.data?.statusCode || 500).send({
-                statusCode: error.response?.data?.statusCode || 500,
-                message: error.response?.data?.message[0]?.messages[0]?.message || error.message
-            });
-        }
+        res.status(error.response?.data?.statusCode || 500).send({
+            statusCode: error.response?.data?.statusCode || 500,
+            message: error.response?.data?.message[0]?.messages[0]?.message || error.message
+        });
     }
 });

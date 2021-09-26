@@ -13,8 +13,7 @@ import useUser from '../lib/useUser';
 import { API_URL } from '../utils/urls';
 import { childrenVariants, containerVariants, errorMessageVariant } from '../utils/variants';
 
-const Account: NextPage = ({ orders }) => {
-    console.log('orders', orders);
+const Account: NextPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [redirectTo, setRedirectTo] = useAsyncSetState<string>('/sign?sign=in');
