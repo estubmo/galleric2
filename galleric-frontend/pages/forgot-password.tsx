@@ -2,19 +2,23 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import { PageWrapper } from '../components/PageWrapper';
 import { childrenVariants, errorMessageVariant } from '../utils/variants';
 
 const ForgotPassword: NextPage = () => {
-    const [email, setEmail] = useState<string>('');
+    const router = useRouter();
+
+    const [email, setEmail] = useState<string[] | string>(router?.query?.email || '');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isSentSuccessful, setIsSentSuccessful] = useState(false);
     const [isSending, setIsSending] = useState(false);
 
     const handleSendForgotPasswordEmail = async () => {
+        setErrorMessage('');
         setIsSending(true);
         try {
             await axios.post('/api/forgot-password', { email });

@@ -174,6 +174,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                autoComplete="username"
                                 placeholder="Your email address goes here"
                             />
                             <motion.label
@@ -188,6 +189,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                autoComplete="current-password"
                                 placeholder="Password"
                             />
                             <div className="flex items-center justify-between w-full">
@@ -238,7 +240,9 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                     </AnimatePresence>
                                 </motion.button>
                                 <motion.span variants={childrenVariants}>
-                                    <Link href="/forgot-password">
+                                    <Link
+                                        as="/forgot-password"
+                                        href={'/forgot-password?email=' + email}>
                                         <a className="text-blue-600 hover:underline focus-visible:underline focus:outline-none">
                                             Forgotten password?
                                         </a>
