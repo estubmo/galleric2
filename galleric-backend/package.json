@@ -12,8 +12,8 @@
   "devDependencies": {},
   "dependencies": {
     "dotenv": "^10.0.0",
-    "knex": "0.95.6",
-    "pg": "8.6.0",
+    "knex": "0.95.11",
+    "pg": "8.7.1",
     "pg-connection-string": "^2.5.0",
     "strapi": "3.6.8",
     "strapi-admin": "3.6.8",
