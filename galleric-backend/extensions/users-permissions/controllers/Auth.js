@@ -278,13 +278,6 @@ module.exports = {
   },
 
   async forgotPassword(ctx) {
-    console.log(
-      "%cRetNemt%cline:280%cctx",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-      ctx
-    );
     let { email } = ctx.request.body;
 
     // Check if the provided email is valid or not.
@@ -340,6 +333,13 @@ module.exports = {
     const advanced = await pluginStore.get({
       key: "advanced",
     });
+    console.log(
+      "%cRetNemt%cline:340%cadvanced",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+      advanced
+    );
 
     const userInfo = sanitizeEntity(user, {
       model: strapi.query("user", "users-permissions").model,
@@ -348,10 +348,17 @@ module.exports = {
     settings.message = await strapi.plugins[
       "users-permissions"
     ].services.userspermissions.template(settings.message, {
-      URL: advanced.email_reset_password,
+      URL: process.env.FRONTEND_URL + process.env.RESET_PASSWORD_PATH,
       USER: userInfo,
       TOKEN: resetPasswordToken,
     });
+    console.log(
+      "%cRetNemt%cline:355%csettings.message",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
+      settings.message
+    );
 
     settings.object = await strapi.plugins[
       "users-permissions"
