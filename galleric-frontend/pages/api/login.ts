@@ -1,31 +1,15 @@
 import axios from 'axios';
 import { NextApiResponse } from 'next';
-import { ApiError } from 'next/dist/server/api-utils';
 
 import withSession from '../../lib/session';
 import { NextApiRequestWithIronSession } from '../../types/nextapirequest';
+import IStrapiUserResponse from '../../types/strapi';
 import { API_URL } from '../../utils/urls';
-
-interface IStrapiResponse {
-    data: {
-        user: {
-            id: number;
-            email: string;
-            provider: string;
-            confirmed: boolean;
-            blocked: boolean | null;
-            created_at: string;
-            updated_at: string;
-            orders: string[];
-        };
-        jwt: string;
-    };
-}
 
 export default withSession(async (req: NextApiRequestWithIronSession, res: NextApiResponse) => {
     const { identifier, password } = await req.body;
     try {
-        const response: IStrapiResponse = await axios.post(`${API_URL}/auth/local`, {
+        const response: IStrapiUserResponse = await axios.post(`${API_URL}/auth/local`, {
             identifier: identifier,
             password: password
         });

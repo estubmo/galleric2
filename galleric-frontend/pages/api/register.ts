@@ -3,12 +3,13 @@ import { NextApiResponse } from 'next';
 
 import withSession from '../../lib/session';
 import { NextApiRequestWithIronSession } from '../../types/nextapirequest';
+import IStrapiUserResponse from '../../types/strapi';
 import { API_URL } from '../../utils/urls';
 
 export default withSession(async (req: NextApiRequestWithIronSession, res: NextApiResponse) => {
     const { identifier, password } = await req.body;
     try {
-        const response = await axios.post(`${API_URL}/auth/local/register`, {
+        const response: IStrapiUserResponse = await axios.post(`${API_URL}/auth/local/register`, {
             username: identifier,
             email: identifier,
             password: password
