@@ -37,6 +37,7 @@
         "use-shopping-cart": "2.4.3"
     },
     "devDependencies": {
+        "@next/eslint-plugin-next": "^11.1.2",
         "@types/micro": "^7.3.5",
         "@types/micro-cors": "^0.1.0",
         "@types/next-auth": "^3.15.0",

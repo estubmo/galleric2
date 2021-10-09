@@ -27,6 +27,7 @@ module.exports = {
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:@next/next/recommended',
         'prettier'
     ],
     rules: {
