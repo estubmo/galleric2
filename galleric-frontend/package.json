@@ -34,7 +34,7 @@
         "react-perfect-scrollbar": "^1.5.8",
         "stripe": "8.178.0",
         "swr": "^1.0.1",
-        "use-shopping-cart": "3.0.3"
+        "use-shopping-cart": "2.4.3"
     },
     "devDependencies": {
         "@types/micro": "^7.3.5",
