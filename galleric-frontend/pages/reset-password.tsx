@@ -62,6 +62,7 @@ const ResetPassword: NextPage = () => {
                         className="w-full py-2 mt-2 text-gray-200 placeholder-gray-600 bg-transparent border-0 border-b border-gray-400 autofill:text-fill-gray-200 autofill:shadow-fill-gray-900 focus:bg-transparent hover:border-gray-100 focus:border-gray-100 focus:outline-none"
                         id="password"
                         type="password"
+                        autoComplete="new-password"
                         value={password}
                         disabled={isResetSuccessful}
                         onChange={(e) => {

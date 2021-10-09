@@ -1,17 +1,58 @@
+import FocusTrap from 'focus-trap-react';
+import {
+    AnimatePresence,
+    AnimateSharedLayout,
+    motion,
+    useMotionValue,
+    useViewportScroll
+} from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import useUser from '../lib/useUser';
+import { routes } from '../utils/routes';
+import AccountButton from './AccountButton';
 import Cart from './Cart';
+import CartButton from './CartButton';
 import CartSummary from './CartSummary';
 import { CloseButton } from './CloseButton';
-import Menu from './Menu';
 import Modal from './Modal';
-import NavBarAccountButton from './NavBarAccountButton';
-import NavBarCartButton from './NavBarCartButton';
+import NavBarButton from './NavBarButton';
+import NavBarHamburgerButton from './NavBarHamburgerButton';
+import NavBarLink from './NavBarLink';
 import Stub from './Stub';
 import Svanhild from './Svanhild';
 
+const hideNavBarVariants = {
+    show: { opacity: 1, y: 0 },
+    hide: { opacity: 0.0, y: '-100%' }
+};
+
+const variants = {
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1
+    }
+};
+
+const childVariants = {
+    hidden: {
+        opacity: 0,
+        scale: 0
+    },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+};
+
+const SCROLL_Y_MIN_TRESHHOLD = 100;
 interface Links {
     href: string;
     as: string;
@@ -21,45 +62,144 @@ const accountLink = { href: '/account', as: '/account' };
 
 const NavBar = (): JSX.Element => {
     const router = useRouter();
+    const { user } = useUser();
+    const pathname = router.pathname;
 
     const [link, setLink] = useState<Links>(signInLink);
-
-    const { user } = useUser();
+    const [open, setOpen] = useState<boolean>(false);
+    const [prevScrollY, setPrevScrollY] = useState(0);
 
     useEffect(() => {
-        if (user) {
-            setLink(accountLink);
-        } else {
-            setLink(signInLink);
-        }
+        user ? setLink(accountLink) : setLink(signInLink);
     }, [user]);
+
+    useEffect(() => {
+        document.body.style.overflow = open ? 'hidden' : 'unset';
+    }, [open]);
+
+    useEffect(() => {
+        router.beforePopState(() => {
+            setOpen(false);
+            return true;
+        });
+    }, [router]);
+
+    const handleSetOpen = () => {
+        setOpen((prev: boolean) => !prev);
+    };
+    const [hideNavBar, setHideNavBar] = React.useState(false);
+
+    const { scrollY } = useViewportScroll();
+
+    const updateScrollY = useCallback(
+        (scrollY) => {
+            if (scrollY < prevScrollY) {
+                setHideNavBar(false);
+            } else if (scrollY > SCROLL_Y_MIN_TRESHHOLD && scrollY > prevScrollY) {
+                setHideNavBar(true);
+            }
+
+            setPrevScrollY(scrollY);
+        },
+        [prevScrollY]
+    );
+
+    useEffect(() => {
+        return scrollY.onChange((y) => updateScrollY(y));
+    }, [scrollY, updateScrollY]);
 
     return (
         <>
-            <nav className="fixed z-20 flex items-start justify-between w-full h-auto">
-                <div className="flex-1">
-                    <div className="relative">
-                        <Svanhild
-                            containerClassName="left-0 top-0 p-4 text-gray-100 absolute"
-                            svgClassName="h-6 md:h-10 fill-current stroke-current"
-                        />
-                        <Stub
-                            containerClassName="left-0 top-8 p-4 text-gray-100 absolute"
-                            svgClassName="h-6 md:h-10 fill-current stroke-current"
-                        />
-                    </div>
+            <motion.nav
+                className="fixed z-20 flex items-center justify-between w-full h-auto p-6"
+                initial={{
+                    backgroundColor: 'rgba(0,0,0,0)'
+                }}
+                whileHover={{
+                    backgroundColor: 'rgba(0,0,0,0.1)'
+                }}
+                variants={hideNavBarVariants}
+                animate={hideNavBar ? 'hide' : 'show'}
+                transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}>
+                <div className="relative z-20 flex-1">
+                    <Link href="/" passHref shallow>
+                        <button>
+                            <a>
+                                <Svanhild
+                                    containerClassName="text-gray-100 "
+                                    svgClassName="h-6 fill-current stroke-current"
+                                />
+                                <Stub
+                                    containerClassName="top-6 text-gray-100 "
+                                    svgClassName="h-6 fill-current stroke-current"
+                                />
+                            </a>
+                        </button>
+                    </Link>
                 </div>
 
-                <div className="flex-none">
-                    <Menu />
-                </div>
-                <div className="flex-1">
-                    <div className="flex justify-end p-4">
-                        <NavBarAccountButton href={link.href} as={link.as} />
-                        <NavBarCartButton href="?openCart=true" as="/cart" />
+                <div className="items-center flex-shrink-0">
+                    <div className="hidden w-0 h-0 md:w-auto md:h-8 md:flex">
+                        <motion.div
+                            style={{ originX: '50%', originY: 0 }}
+                            className="flex items-center justify-between w-full space-x-4 font-bold text-gray-100 text-md"
+                            variants={childVariants}>
+                            <AnimateSharedLayout type="crossfade">
+                                {routes.map((route) => (
+                                    <NavBarLink
+                                        key={route.name}
+                                        route={route}
+                                        active={pathname === route.path}
+                                    />
+                                ))}
+                            </AnimateSharedLayout>
+                        </motion.div>
+                    </div>
+                    <div className="flex flex-col items-center justify-center h-auto md:h-0 md:hidden">
+                        <AnimatePresence exitBeforeEnter>
+                            <div key="MenuBar">
+                                <NavBarHamburgerButton isOpen={open} onClick={handleSetOpen} />
+                                {/* TODO: This should be part of focus-trap, but can't right now due to a bug */}
+                                <FocusTrap>
+                                    {open && (
+                                        <motion.div
+                                            initial="hidden"
+                                            animate="visible"
+                                            exit="hidden"
+                                            variants={variants}
+                                            className="fixed inset-0 z-10 w-full h-screen bg-gray-900">
+                                            <motion.div
+                                                style={{ originX: '50%', originY: 0 }}
+                                                className="flex flex-col items-center justify-between w-full text-2xl font-bold text-gray-100 mt-14"
+                                                variants={childVariants}>
+                                                {routes.map((route) => (
+                                                    <NavBarLink
+                                                        className="mt-2"
+                                                        key={route.name}
+                                                        route={route}
+                                                        active={pathname === route.path}
+                                                        onClick={handleSetOpen}
+                                                    />
+                                                ))}
+                                            </motion.div>
+                                        </motion.div>
+                                    )}
+                                </FocusTrap>
+                            </div>
+                        </AnimatePresence>
                     </div>
                 </div>
-            </nav>
+                <div className="z-20 flex-1">
+                    <div className="flex justify-end space-x-4">
+                        <NavBarButton href={link.href} as={link.as}>
+                            <AccountButton className="text-gray-100" />
+                        </NavBarButton>
+                        <NavBarButton href="?openCart=true" as="/cart">
+                            <CartButton className="text-gray-100" />
+                        </NavBarButton>
+                    </div>
+                </div>
+            </motion.nav>
             <Modal showModal={!!router.query.openCart} returnHref={router.pathname}>
                 <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 rounded-xl">
                     <Cart>
