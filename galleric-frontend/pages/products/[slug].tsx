@@ -39,8 +39,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const res = await axios.get(`${API_URL}/products/`);
-    const products = res.data;
+    const { data: { products = [] } = { products: [] } } = await axios.get(`${API_URL}/products/`);
 
     return {
         paths: products.map((product: IProduct) => ({

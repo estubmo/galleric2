@@ -20,7 +20,12 @@ const Verify: NextPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [resent, setResent] = useState(false);
 
-    const { data } = useSWR('/api/is-confirmed', fetcher, {
+    const {
+        data = {
+            confirmed: false,
+            email: ''
+        }
+    } = useSWR('/api/is-confirmed', fetcher, {
         refreshInterval: refreshInterval
     });
 
@@ -69,7 +74,8 @@ const Verify: NextPage = () => {
                         <>
                             <motion.h2
                                 className="text-4xl font-thin tracking-widest text-gray-400"
-                                variants={childrenVariants}>
+                                variants={childrenVariants}
+                            >
                                 Verification
                             </motion.h2>
                             <motion.div variants={childrenVariants} className="mt-4">
@@ -85,7 +91,8 @@ const Verify: NextPage = () => {
                                     role="button"
                                     tabIndex={0}
                                     onClick={handleResendEmail}
-                                    onKeyPress={handleResendEmail}>
+                                    onKeyPress={handleResendEmail}
+                                >
                                     resend email
                                 </span>
                                 .
@@ -95,7 +102,8 @@ const Verify: NextPage = () => {
                     {data && (
                         <motion.div
                             variants={childrenVariants}
-                            className="flex flex-col items-center mt-4">
+                            className="flex flex-col items-center mt-4"
+                        >
                             <div className="mb-1">Or enter your verification code here:</div>
                             <VerificationCodeInput
                                 type="number"
@@ -113,7 +121,8 @@ const Verify: NextPage = () => {
                             exit="hidden"
                             layout
                             variants={errorMessageVariant}
-                            className="mt-4 text-gray-100">
+                            className="mt-4 text-gray-100"
+                        >
                             Loading...
                         </motion.p>
                     )}
@@ -124,7 +133,8 @@ const Verify: NextPage = () => {
                             exit="hidden"
                             layout
                             variants={errorMessageVariant}
-                            className="mt-4 text-gray-100">
+                            className="mt-4 text-gray-100"
+                        >
                             Resent...
                         </motion.p>
                     )}
@@ -135,7 +145,8 @@ const Verify: NextPage = () => {
                             exit="hidden"
                             layout
                             variants={errorMessageVariant}
-                            className="mt-4 text-red-400">
+                            className="mt-4 text-red-400"
+                        >
                             {errorMessage}
                         </motion.p>
                     )}
@@ -146,7 +157,8 @@ const Verify: NextPage = () => {
                             exit="hidden"
                             layout
                             variants={errorMessageVariant}
-                            className="mt-4 text-yellow-400">
+                            className="mt-4 text-yellow-400"
+                        >
                             {successMessage}
                         </motion.p>
                     )}
