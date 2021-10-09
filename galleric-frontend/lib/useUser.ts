@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import IUser from '../types/user';
 
 interface IUseUser {
-    user: IUser;
+    user: IUser | undefined;
     mutateUser: (data?: any, shouldRevalidate?: boolean | undefined) => Promise<any>;
     isValidating: boolean;
 }
