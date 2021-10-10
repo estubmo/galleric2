@@ -8,7 +8,7 @@ interface Props {
 
 const CartButton = ({ className }: Props): JSX.Element => {
     return (
-        <motion.svg
+        <svg
             version="1.1"
             id="cart_1"
             xmlns="http://www.w3.org/2000/svg"
@@ -18,11 +18,7 @@ const CartButton = ({ className }: Props): JSX.Element => {
             viewBox="0 0 512.001 512.001"
             className={clsx('fill-current select-none', className)}
             overflow="visible"
-            preserveAspectRatio="none"
-            role="button"
-            whileTap={{ scale: 0.75 }}
-            whileHover={{ scale: 1.1 }}
-            style={{ originX: '50%', originY: '50%', willChange: 'transform' }}>
+            preserveAspectRatio="none">
             <g>
                 <path
                     d="M503.142,79.784c-7.303-8.857-18.128-13.933-29.696-13.933H176.37c-6.085,0-11.023,4.938-11.023,11.023
@@ -52,7 +48,7 @@ c21.269,0,38.581-17.312,38.581-38.581S445.661,424.104,424.392,424.104z M424.392,
 c0-9.116,7.419-16.535,16.535-16.535c9.116,0,16.535,7.419,16.535,16.535C440.927,471.802,433.508,479.22,424.392,479.22z"
                 />
             </g>
-        </motion.svg>
+        </svg>
     );
 };
 

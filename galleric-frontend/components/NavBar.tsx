@@ -84,10 +84,21 @@ const NavBar = (): JSX.Element => {
         });
     }, [router]);
 
+    useEffect(() => {
+        function handleResize() {
+            setOpen(false);
+        }
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    });
+
     const handleSetOpen = () => {
         setOpen((prev: boolean) => !prev);
     };
-    const [hideNavBar, setHideNavBar] = React.useState(false);
+    const [hideNavBar, setHideNavBar] = useState(false);
 
     const { scrollY } = useViewportScroll();
 
@@ -123,7 +134,12 @@ const NavBar = (): JSX.Element => {
                 transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}>
                 <div className="relative z-20 flex-1">
                     <Link href="/" passHref shallow>
-                        <button>
+                        <motion.button
+                            className="focus:outline-none"
+                            whileTap={{ scale: 0.75 }}
+                            whileHover={{ scale: 1.1 }}
+                            whileFocus={{ scale: 1.2 }}
+                            onClick={handleSetOpen}>
                             <a>
                                 <Svanhild
                                     containerClassName="text-gray-100 "
@@ -134,7 +150,7 @@ const NavBar = (): JSX.Element => {
                                     svgClassName="h-6 fill-current stroke-current"
                                 />
                             </a>
-                        </button>
+                        </motion.button>
                     </Link>
                 </div>
 
@@ -155,7 +171,7 @@ const NavBar = (): JSX.Element => {
                             </AnimateSharedLayout>
                         </motion.div>
                     </div>
-                    <div className="flex flex-col items-center justify-center h-auto md:h-0 md:hidden">
+                    <div className="flex flex-col items-center justify-center h-auto md:h-0 md:invisible">
                         <AnimatePresence exitBeforeEnter>
                             <div key="MenuBar">
                                 <NavBarHamburgerButton isOpen={open} onClick={handleSetOpen} />
@@ -191,10 +207,10 @@ const NavBar = (): JSX.Element => {
                 </div>
                 <div className="z-20 flex-1">
                     <div className="flex justify-end space-x-4">
-                        <NavBarButton href={link.href} as={link.as}>
+                        <NavBarButton href={link.href} as={link.as} onClick={handleSetOpen}>
                             <AccountButton className="text-gray-100" />
                         </NavBarButton>
-                        <NavBarButton href="?openCart=true" as="/cart">
+                        <NavBarButton href="?openCart=true" as="/cart" onClick={handleSetOpen}>
                             <CartButton className="text-gray-100" />
                         </NavBarButton>
                     </div>

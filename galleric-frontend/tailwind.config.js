@@ -73,13 +73,9 @@ module.exports = {
     },
     variants: {
         extend: {
-            // borderColor: ['focus-visible'],
-            // textDecoration: ['focus-visible'],
+            textDecoration: ['focus-visible'],
             textFill: ['autofill'],
             shadowFill: ['autofill']
-            // opacity: ['disabled'],
-            // cursor: ['disabled']
-            // borderWidth: ['first']
         }
     },
     plugins: [

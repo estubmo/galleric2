@@ -7,7 +7,6 @@ interface Props extends SVGMotionProps<any> {
     width?: number;
     className?: string;
     height?: number;
-    onClick: () => void;
     strokeWidth?: string | number;
     transition?: Transition;
     lineProps?: any;
@@ -18,7 +17,6 @@ const MenuButton = ({
     width = 18,
     height = 18,
     strokeWidth = 1,
-    onClick,
     transition = undefined,
     className = '',
     lineProps = null,
@@ -66,28 +64,15 @@ const MenuButton = ({
     const unitHeight = 4;
     const unitWidth = (unitHeight * (width as number)) / (height as number);
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-        e.stopPropagation();
-        if (e.key === ' ' || e.key === 'Enter' || e.key === 'Spacebar') onClick();
-    };
-
     return (
         <motion.svg
             className={clsx('fill-current stroke-current select-none', className)}
             viewBox={`0 0 ${unitWidth} ${unitHeight}`}
             overflow="visible"
             preserveAspectRatio="none"
-            tabIndex={0}
-            role="button"
             aria-expanded={isOpen}
-            onClick={onClick}
-            onKeyDown={handleKeyDown}
             width={width}
             height={height}
-            whileTap={{ scale: 0.75 }}
-            whileHover={{ scale: 1.1 }}
-            whileFocus={{ scale: 1.2 }}
-            style={{ originX: '50%', originY: '50%', willChange: 'transform' }}
             {...props}>
             <motion.line x1="0" x2={unitWidth} y1="0" y2="0" variants={top} {...lineProps} />
             <motion.line x1="0" x2={unitWidth} y1="2" y2="2" variants={center} {...lineProps} />
