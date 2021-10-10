@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
@@ -39,10 +39,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const { data: { products = [] } = { products: [] } } = await axios.get(`${API_URL}/products/`);
+    const response: AxiosResponse = await axios.get(`${API_URL}/products/`);
+    const { data = [] }: { data: [] } = response;
 
     return {
-        paths: products.map((product: IProduct) => ({
+        paths: data.map((product: IProduct) => ({
             params: { slug: String(product.slug) }
         })),
         fallback: false

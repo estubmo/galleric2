@@ -73,7 +73,7 @@ const Store = ({ products }: IProducts): JSX.Element => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
     const res = await axios.get(`${API_URL}/products/`);
     const products = res.data;
     return { props: { products }, revalidate: 60 };
