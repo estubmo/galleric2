@@ -1,11 +1,5 @@
 import FocusTrap from 'focus-trap-react';
-import {
-    AnimatePresence,
-    AnimateSharedLayout,
-    motion,
-    useMotionValue,
-    useViewportScroll
-} from 'framer-motion';
+import { AnimatePresence, AnimateSharedLayout, motion, useViewportScroll } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
