@@ -89,8 +89,8 @@ const NavBar = (): JSX.Element => {
         };
     });
 
-    const handleSetOpen = () => {
-        setOpen((prev: boolean) => !prev);
+    const handleSetOpen = (value?: boolean | undefined) => {
+        setOpen((prev: boolean) => (value !== undefined ? value : !prev));
     };
     const [hideNavBar, setHideNavBar] = useState(false);
 
@@ -133,7 +133,7 @@ const NavBar = (): JSX.Element => {
                             whileTap={{ scale: 0.75 }}
                             whileHover={{ scale: 1.1 }}
                             whileFocus={{ scale: 1.2 }}
-                            onClick={handleSetOpen}>
+                            onClick={() => handleSetOpen(false)}>
                             <a>
                                 <Svanhild
                                     containerClassName="text-gray-100 "
@@ -201,10 +201,16 @@ const NavBar = (): JSX.Element => {
                 </div>
                 <div className="z-20 flex-1">
                     <div className="flex justify-end space-x-4">
-                        <NavBarButton href={link.href} as={link.as} onClick={handleSetOpen}>
+                        <NavBarButton
+                            href={link.href}
+                            as={link.as}
+                            onClick={() => handleSetOpen(false)}>
                             <AccountButton className="text-gray-100" />
                         </NavBarButton>
-                        <NavBarButton href="?openCart=true" as="/cart" onClick={handleSetOpen}>
+                        <NavBarButton
+                            href="?openCart=true"
+                            as="/cart"
+                            onClick={() => handleSetOpen(false)}>
                             <CartButton className="text-gray-100" />
                         </NavBarButton>
                     </div>
