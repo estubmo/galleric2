@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Router from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import { PageWrapper } from '../components/PageWrapper';
@@ -18,6 +18,7 @@ const Verify: NextPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [resent, setResent] = useState(false);
 
     const {
@@ -36,21 +37,24 @@ const Verify: NextPage = () => {
         }
     }, [data]);
 
-    const handleComplete = async (val: string) => {
-        setErrorMessage('');
-        setIsLoading(true);
-        try {
-            await axios.post('/api/verify', {
-                email: data?.email,
-                confirmationToken: val
-            });
-            setSuccessMessage(`Successfully verified ${data?.email}! Redirecting...`);
-        } catch (error) {
-            setErrorMessage(error.response.data.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const handleComplete = useCallback(
+        async (val: string) => {
+            setErrorMessage('');
+            setIsLoading(true);
+            try {
+                await axios.post('/api/verify', {
+                    email: data?.email,
+                    confirmationToken: val
+                });
+                setSuccessMessage(`Successfully verified ${data?.email}! Redirecting...`);
+            } catch (error) {
+                setErrorMessage(error.response.data.message);
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [data?.email]
+    );
 
     const handleResendEmail = async () => {
         try {
@@ -107,7 +111,7 @@ const Verify: NextPage = () => {
                                 fieldWidth={42}
                                 fieldHeight={42}
                                 isLoading={isLoading}
-                                onComplete={(val) => handleComplete(val)}
+                                onComplete={handleComplete}
                             />
                         </motion.div>
                     )}

@@ -1,4 +1,3 @@
-import FocusTrap from 'focus-trap-react';
 import { AnimatePresence, motion, useViewportScroll } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';

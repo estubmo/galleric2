@@ -5,12 +5,9 @@ import { AnimatePresence } from 'framer-motion';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import { CartProvider } from 'use-shopping-cart';
 
 import Layout from '../components/Layout';
 import SmoothScroll from '../components/SmoothScroll';
-import * as config from '../config';
-import getStripe from '../utils/get-stripejs';
 
 function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
     return (

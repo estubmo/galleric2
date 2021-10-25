@@ -1,17 +1,14 @@
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { withIronSession } from 'next-iron-session';
 import React, { useState } from 'react';
 
 import { PageWrapper } from '../components/PageWrapper';
 import { useAsyncSetState } from '../lib/hooks';
-import withSession from '../lib/session';
 import useUser from '../lib/useUser';
-import { API_URL } from '../utils/urls';
-import { childrenVariants, containerVariants, errorMessageVariant } from '../utils/variants';
+import { childrenVariants, errorMessageVariant } from '../utils/variants';
 
 const Account: NextPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -104,17 +101,3 @@ const Account: NextPage = () => {
 };
 
 export default Account;
-
-// export const getServerSideProps = withSession(async ({ req, res }) => {
-//     const user = req.session.get('user');
-
-//     if (!user) {
-//         res.statusCode = 404;
-//         res.end();
-//         return { props: {} };
-//     }
-//     const result = await axios.get(`${API_URL}/orders`, {});
-//     const orders = result.data;
-
-//     return { props: { orders } };
-// });

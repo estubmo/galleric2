@@ -1,17 +1,3 @@
-// export interface IProduct {
-//     name: string;
-//     description: string;
-//     sku: string;
-//     price: number;
-//     image: string;
-//     attribution: string;
-//     currency: string;
-// }
-
-// export interface IProductX extends Omit<IProduct, 'description'> {
-//     description?: undefined;
-// }
-
 export enum Currency {
     USD = 'USD',
     EUR = 'EUR',

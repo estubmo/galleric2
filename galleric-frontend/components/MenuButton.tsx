@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import clsx from 'clsx';
 import { motion, SVGMotionProps, Transition } from 'framer-motion';
-import React, { KeyboardEvent } from 'react';
+import React from 'react';
 
 interface Props extends SVGMotionProps<any> {
     isOpen?: boolean;

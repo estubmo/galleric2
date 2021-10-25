@@ -1,13 +1,13 @@
 import axios from 'axios';
 import Router from 'next/router';
 import { useEffect } from 'react';
-import useSWR from 'swr';
+import useSWR, { KeyedMutator } from 'swr';
 
 import IUser from '../types/user';
 
 interface IUseUser {
     user: IUser | undefined;
-    mutateUser: (data?: any, shouldRevalidate?: boolean | undefined) => Promise<any>;
+    mutateUser: KeyedMutator<IUser>;
     isValidating: boolean;
 }
 
@@ -30,7 +30,11 @@ export default function useUser({
     redirectAs = redirectTo,
     redirectIfFound
 } = defaultProps): IUseUser {
-    const { data: user, mutate: mutateUser, isValidating } = useSWR('/api/user', fetcher);
+    const {
+        data: user,
+        mutate: mutateUser,
+        isValidating
+    } = useSWR<IUser, Error>('/api/user', fetcher);
 
     useEffect(() => {
         if (!redirectTo) {

@@ -1,6 +1,11 @@
-import { withIronSession } from 'next-iron-session';
+import { NextApiResponse } from 'next';
+import { Handler, Session, withIronSession } from 'next-iron-session';
 
-export default function withSession(handler: any) {
+import { NextApiRequestWithIronSession } from '../types/nextapirequest';
+
+export default function withSession(
+    handler: Handler<NextApiRequestWithIronSession, NextApiResponse>
+): (...args: []) => Promise<Session> {
     const MIN_PW_LENGTH = 32;
     const pw = process.env.SECRET_COOKIE_PASSWORD;
     if (!pw) throw Error('SECRET_COOKIE_PASSWORD not set');

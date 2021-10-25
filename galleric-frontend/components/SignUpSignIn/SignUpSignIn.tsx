@@ -22,6 +22,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
     const [password, setPassword] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [redirectTo, setRedirectTo] = useAsyncSetState<string>('/account');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [redirectAs, setRedirectAs] = useAsyncSetState<string | undefined>(undefined);
 
     const { mutateUser } = useUser({

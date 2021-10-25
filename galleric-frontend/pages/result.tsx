@@ -14,6 +14,7 @@ const ResultPage: NextPage = () => {
 
     // Fetch CheckoutSession from static page via
     // https://nextjs.org/docs/basic-features/data-fetching#static-generation
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, error } = useSWR(
         router.query.session_id ? `/api/checkout_sessions/${router.query.session_id}` : null,
         fetcher

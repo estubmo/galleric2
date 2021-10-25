@@ -7,7 +7,6 @@ import { formatCurrencyString } from 'use-shopping-cart';
 
 import { IProduct } from '../../model/product';
 import { CloseButton } from '../CloseButton';
-import { MenuButton } from '../MenuButton';
 import { ProductImage } from './ProductImage';
 import { ProductImageSelector } from './ProductImageSelector';
 
@@ -33,6 +32,7 @@ export const ProductCard = ({
                     layoutId={`product-container-${product.slug}`}>
                     <PerfectScrollbar
                         options={{ wheelPropagation: false }}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         containerRef={(ref: any) => {
                             if (ref) {
                                 // https://github.com/mdbootstrap/perfect-scrollbar/pull/934/files

@@ -1,10 +1,7 @@
 import { AnimateSharedLayout, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { useAsyncSetState } from '../lib/hooks';
-import { childrenVariants, containerVariants } from '../utils/variants';
-
-// import styles from './styles.css';
+import { containerVariants } from '../utils/variants';
 
 const KEY = {
     backspace: 'Backspace',
@@ -31,7 +28,6 @@ export const VerificationCodeInput = ({
     fieldHeight = 54,
     fieldWidth = 58,
     fields = 6,
-    disabled = false,
     onComplete,
     type = 'number'
 }: IValidationCodeInputProps): JSX.Element => {
@@ -62,7 +58,7 @@ export const VerificationCodeInput = ({
                 if (isNumeric(numbers)) onComplete(numbers);
             }
         }
-    }, [values]);
+    }, [values, fields, onComplete, type]);
 
     const changeValue = async (newValue: number | string) => {
         setValues((prev) => {

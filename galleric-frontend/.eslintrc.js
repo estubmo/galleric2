@@ -21,13 +21,14 @@ module.exports = {
         es6: true
     },
     extends: [
+        'next',
+        'next/core-web-vitals',
         'eslint:recommended',
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:@next/next/recommended',
         'prettier'
     ],
     rules: {
