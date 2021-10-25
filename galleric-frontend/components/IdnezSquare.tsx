@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, MotionValue } from 'framer-motion';
 import React, { useState } from 'react';
 
 type Props = {
     index: number;
-    springScaleY: number;
+    springScaleY: MotionValue<number>;
 };
 const IdnezSquare = ({ springScaleY }: Props): JSX.Element => {
     const color = `rgb(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, ${
