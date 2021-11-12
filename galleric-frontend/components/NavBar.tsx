@@ -168,33 +168,34 @@ const NavBar = (): JSX.Element => {
                     <div className="flex flex-col items-center justify-center h-auto md:h-0 md:invisible">
                         <AnimatePresence exitBeforeEnter>
                             <div key="MenuBar">
-                                <NavBarHamburgerButton isOpen={open} onClick={handleSetOpen} />
-                                {/* TODO: This should be part of focus-trap, but can't right now due to a bug */}
-                                <FocusTrap>
-                                    {open && (
+                                <NavBarHamburgerButton
+                                    isOpen={open}
+                                    onClick={() => handleSetOpen()}
+                                />
+                                {open && (
+                                    <motion.div
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit="hidden"
+                                        variants={variants}
+                                        className="fixed inset-0 z-10 w-full h-screen py-4 overflow-y-auto bg-gray-900 bg-opacity-50">
                                         <motion.div
-                                            initial="hidden"
-                                            animate="visible"
-                                            exit="hidden"
-                                            variants={variants}
-                                            className="fixed inset-0 z-10 w-full h-screen bg-gray-900">
-                                            <motion.div
-                                                style={{ originX: '50%', originY: 0 }}
-                                                className="flex flex-col items-center justify-between w-full text-2xl font-bold text-gray-100 mt-14"
-                                                variants={childVariants}>
-                                                {routes.map((route) => (
-                                                    <NavBarLink
-                                                        className="mt-2"
-                                                        key={route.name}
-                                                        route={route}
-                                                        active={pathname === route.path}
-                                                        onClick={handleSetOpen}
-                                                    />
-                                                ))}
-                                            </motion.div>
+                                            style={{ originX: '50%', originY: 0 }}
+                                            className="flex flex-col items-center justify-between w-full text-2xl font-bold text-gray-100 mt-14"
+                                            variants={childVariants}>
+                                            {routes.map((route) => (
+                                                <NavBarLink
+                                                    className="mt-2"
+                                                    key={route.name}
+                                                    route={route}
+                                                    active={pathname === route.path}
+                                                    onClick={() => handleSetOpen(false)}
+                                                />
+                                            ))}
                                         </motion.div>
-                                    )}
-                                </FocusTrap>
+                                        {/* TODO: Add Footer here */}
+                                    </motion.div>
+                                )}
                             </div>
                         </AnimatePresence>
                     </div>
@@ -217,7 +218,7 @@ const NavBar = (): JSX.Element => {
                 </div>
             </motion.nav>
             <Modal showModal={!!router.query.openCart} returnHref={router.pathname}>
-                <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 rounded-xl">
+                <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 bg-opacity-50 rounded-xl">
                     <Cart>
                         <div className="relative">
                             <div className="absolute top-0 right-0">

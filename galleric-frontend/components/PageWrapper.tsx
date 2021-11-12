@@ -16,7 +16,7 @@ export const PageWrapper = ({ children, className }: IPageWrapperProps): JSX.Ele
             animate="visible"
             exit="exit"
             variants={pageWrapperVariants}
-            className={clsx(className, 'flex min-h-screen font-light tracking-widest pt-20')}>
+            className={clsx(className, 'flex min-h-screen font-light tracking-widest')}>
             {children}
         </motion.div>
     );
