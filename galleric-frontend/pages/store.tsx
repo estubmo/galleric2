@@ -22,7 +22,7 @@ const Store = ({ products }: IProducts): JSX.Element => {
     }, [router.query.product, products]);
     return (
         <>
-            <AnimateSharedLayout type="crossfade">
+            <AnimateSharedLayout>
                 <div className="flex flex-col items-center w-full min-h-screen bg-gray-900">
                     <motion.div
                         initial="hidden"
