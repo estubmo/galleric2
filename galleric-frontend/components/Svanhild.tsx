@@ -2,8 +2,8 @@ import { motion, useMotionValue } from 'framer-motion';
 import React from 'react';
 
 type Props = {
-    containerClassName: string;
-    svgClassName: string;
+    containerClassName?: string;
+    svgClassName?: string;
 };
 const Svanhild = ({ containerClassName, svgClassName }: Props): JSX.Element => {
     const pathLength = useMotionValue(0);

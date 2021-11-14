@@ -11,26 +11,14 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "top_sliding_image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": ["images", "files", "videos"],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
     "wallpaper": {
       "model": "file",
       "via": "related",
-      "allowedTypes": ["images", "files", "videos"],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
-    "bot_sliding_image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": ["images", "files", "videos"],
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
@@ -40,6 +28,33 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "collections": {
+      "collection": "collection"
+    },
+    "sig": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "stamp": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }

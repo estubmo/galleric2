@@ -1,5 +1,5 @@
-import FocusTrap from 'focus-trap-react';
 import { AnimatePresence, AnimateSharedLayout, motion, useViewportScroll } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -15,8 +15,6 @@ import Modal from './Modal';
 import NavBarButton from './NavBarButton';
 import NavBarHamburgerButton from './NavBarHamburgerButton';
 import NavBarLink from './NavBarLink';
-import Stub from './Stub';
-import Svanhild from './Svanhild';
 
 const hideNavBarVariants = {
     show: { opacity: 1, y: 0 },
@@ -114,9 +112,9 @@ const NavBar = (): JSX.Element => {
     }, [scrollY, updateScrollY]);
 
     return (
-        <>
+        <div className="flex justify-center w-full">
             <motion.nav
-                className="fixed z-20 flex items-center justify-between w-full h-auto p-6"
+                className="fixed z-20 flex items-center justify-between w-full h-auto max-w-sm p-6 md:max-w-full"
                 initial={{
                     backgroundColor: 'rgba(0,0,0,0)'
                 }}
@@ -135,13 +133,11 @@ const NavBar = (): JSX.Element => {
                             whileFocus={{ scale: 1.2 }}
                             onClick={() => handleSetOpen(false)}>
                             <a>
-                                <Svanhild
-                                    containerClassName="text-gray-100 "
-                                    svgClassName="h-6 fill-current stroke-current"
-                                />
-                                <Stub
-                                    containerClassName="top-6 text-gray-100 "
-                                    svgClassName="h-6 fill-current stroke-current"
+                                <Image
+                                    src="/images/stub_sig.png"
+                                    alt="svanhild stub signature"
+                                    width={100}
+                                    height={52}
                                 />
                             </a>
                         </motion.button>
@@ -154,7 +150,7 @@ const NavBar = (): JSX.Element => {
                             style={{ originX: '50%', originY: 0 }}
                             className="flex items-center justify-between w-full space-x-4 font-bold text-gray-100 text-md"
                             variants={childVariants}>
-                            <AnimateSharedLayout type="crossfade">
+                            <AnimateSharedLayout>
                                 {routes.map((route) => (
                                     <NavBarLink
                                         key={route.name}
@@ -178,7 +174,7 @@ const NavBar = (): JSX.Element => {
                                         animate="visible"
                                         exit="hidden"
                                         variants={variants}
-                                        className="fixed inset-0 z-10 w-full h-screen py-4 overflow-y-auto bg-gray-900 bg-opacity-50">
+                                        className="fixed inset-0 z-10 w-full h-screen py-4 overflow-y-auto bg-gray-900 bg-opacity-90">
                                         <motion.div
                                             style={{ originX: '50%', originY: 0 }}
                                             className="flex flex-col items-center justify-between w-full text-2xl font-bold text-gray-100 mt-14"
@@ -218,7 +214,7 @@ const NavBar = (): JSX.Element => {
                 </div>
             </motion.nav>
             <Modal showModal={!!router.query.openCart} returnHref={router.pathname}>
-                <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 bg-opacity-50 rounded-xl">
+                <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 bg-opacity-90 rounded-xl">
                     <Cart>
                         <div className="relative">
                             <div className="absolute top-0 right-0">
@@ -232,7 +228,7 @@ const NavBar = (): JSX.Element => {
                     </Cart>
                 </div>
             </Modal>
-        </>
+        </div>
     );
 };
 

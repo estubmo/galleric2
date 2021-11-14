@@ -11,22 +11,20 @@
     "draftAndPublish": true
   },
   "attributes": {
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
     "title": {
       "type": "string"
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
-    "date": {
-      "type": "date"
-    },
-    "hide": {
-      "type": "boolean",
-      "default": false
-    },
-    "products": {
-      "collection": "product"
     }
   }
 }

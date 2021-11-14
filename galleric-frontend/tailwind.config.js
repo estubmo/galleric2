@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 let makeShadow = (name, rgb) => {
     let obj = {};
 
@@ -17,6 +19,11 @@ module.exports = {
     purge: ['./pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'media', // or 'media' or 'class'
     theme: {
+        colors: {
+            gray: colors.warmGray,
+            blue: colors.sky,
+            yellow: colors.amber
+        },
         extend: {
             boxShadow: {
                 ...makeShadow('cool-gray', '71, 85, 104'),
@@ -68,7 +75,11 @@ module.exports = {
                 '80v': '80vw',
                 '90v': '90vw',
                 '100v': '100vw'
-            }
+            },
+            minHeight: (theme) => ({
+                ...theme('spacing'),
+                156: '624px'
+            })
         }
     },
     variants: {
