@@ -15,7 +15,7 @@ const Scale = ({ children, scaleOffset = 0.2 }: ScaleProps): JSX.Element => {
     const prefersReducedMotion = useReducedMotion();
     const [elementTop, setElementTop] = useState(0);
     const [clientHeight, setClientHeight] = useState(0);
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement>(null);
 
     const { scrollY } = useViewportScroll();
 
@@ -32,19 +32,21 @@ const Scale = ({ children, scaleOffset = 0.2 }: ScaleProps): JSX.Element => {
 
     useEffect(() => {
         const element = ref.current;
-        // save our layout measurements in a function in order to trigger
-        // it both on mount and on resize
-        const onResize = () => {
-            // use getBoundingClientRect instead of offsetTop in order to
-            // get the offset relative to the viewport
-            setElementTop(
-                element.getBoundingClientRect().top + window.scrollY || window.pageYOffset
-            );
-            setClientHeight(window.innerHeight);
-        };
-        onResize();
-        window.addEventListener('resize', onResize);
-        return () => window.removeEventListener('resize', onResize);
+        if (element) {
+            // save our layout measurements in a function in order to trigger
+            // it both on mount and on resize
+            const onResize = () => {
+                // use getBoundingClientRect instead of offsetTop in order to
+                // get the offset relative to the viewport
+                setElementTop(
+                    element.getBoundingClientRect().top + window.scrollY || window.pageYOffset
+                );
+                setClientHeight(window.innerHeight);
+            };
+            onResize();
+            window.addEventListener('resize', onResize);
+            return () => window.removeEventListener('resize', onResize);
+        }
     }, [ref]);
 
     if (prefersReducedMotion) {
