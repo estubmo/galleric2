@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
-import { formatCurrencyString } from 'use-shopping-cart';
 
 import { IProduct } from '../../model/product';
 import { fromImageToUrl } from '../../utils/urls';

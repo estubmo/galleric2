@@ -1,4 +1,4 @@
-import { motion, useSpring, useTransform, useViewportScroll, Variants } from 'framer-motion';
+import { motion, useSpring, useTransform, useViewportScroll } from 'framer-motion';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 

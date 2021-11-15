@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { formatCurrencyString } from 'use-shopping-cart';
 
 import { IProduct } from '../../model/product';
 import { CloseButton } from '../CloseButton';
