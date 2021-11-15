@@ -29,7 +29,7 @@ const Store = ({ products }: IProducts): JSX.Element => {
                         animate="visible"
                         exit="exit"
                         variants={containerVariants}
-                        className="flex flex-col w-full p-4 m-14 max-w-screen-2xl">
+                        className="flex flex-col w-full p-14 max-w-screen-2xl">
                         <motion.h1
                             className="mt-4 text-4xl font-bold tracking-wider"
                             variants={childrenVariants}>
