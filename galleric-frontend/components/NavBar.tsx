@@ -134,6 +134,7 @@ const NavBar = (): JSX.Element => {
                             onClick={() => handleSetOpen(false)}>
                             <a>
                                 <Image
+                                    className="filter invert"
                                     src="/images/stub_sig.png"
                                     alt="svanhild stub signature"
                                     width={100}

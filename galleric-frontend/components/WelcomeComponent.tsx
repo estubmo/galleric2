@@ -104,6 +104,7 @@ const WelcomeComponent = ({ wallpaperUrl, sigUrl, stampUrl }: IWelcomeComponent)
             {wallpaperUrl && (
                 <Image
                     src={wallpaperUrl}
+                    priority
                     className="select-none"
                     alt="Background image"
                     layout="fill"

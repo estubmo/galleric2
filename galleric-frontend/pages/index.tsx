@@ -54,7 +54,7 @@ const IndexPage = ({ frontpageData }: IFrontpageData): JSX.Element => {
                         <MonochromeCollectionComponent collection={monochromeCollection} />
                     )}
                     {monochromeCollection && (
-                        <FooterComponent wallpaperUrl={monochromeCollection?.images[1].url} />
+                        <FooterComponent wallpaperUrl={monochromeCollection?.images[3].url} />
                     )}
                 </Background>
             </div>

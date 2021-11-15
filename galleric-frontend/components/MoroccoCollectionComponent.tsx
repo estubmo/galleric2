@@ -44,10 +44,10 @@ const MoroccoCollectionComponent = ({ collection }: ISlideComponent): JSX.Elemen
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.8 }}
                         style={{ y: 0, x: 0 }}>
-                        {images[0] && (
+                        {images[2] && (
                             <Image
                                 alt="Morocco First Photo"
-                                src={images[0].url}
+                                src={images[2].url}
                                 layout="fill"
                                 objectFit="cover"
                             />
@@ -62,10 +62,10 @@ const MoroccoCollectionComponent = ({ collection }: ISlideComponent): JSX.Elemen
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.8 }}
                         style={{ y: 0, x: 0 }}>
-                        {images[1] && (
+                        {images[0] && (
                             <Image
                                 alt="Morocco Eye Photo"
-                                src={images[1].url}
+                                src={images[0].url}
                                 layout="fill"
                                 objectFit="cover"
                             />
@@ -101,10 +101,10 @@ const MoroccoCollectionComponent = ({ collection }: ISlideComponent): JSX.Elemen
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.8 }}>
-                            {images[0] && (
+                            {images[2] && (
                                 <Image
                                     alt="Morocco First Photo"
-                                    src={images[0].url}
+                                    src={images[2].url}
                                     layout="fill"
                                     objectFit="cover"
                                 />
@@ -117,10 +117,10 @@ const MoroccoCollectionComponent = ({ collection }: ISlideComponent): JSX.Elemen
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.8 }}>
-                        {images[1] && (
+                        {images[0] && (
                             <Image
                                 alt="Morocco Eye Photo"
-                                src={images[1].url}
+                                src={images[0].url}
                                 layout="fill"
                                 objectFit="cover"
                             />

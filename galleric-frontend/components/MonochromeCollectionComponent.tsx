@@ -80,10 +80,10 @@ const MonochromeCollectionComponent = ({ collection }: ISlideComponent): JSX.Ele
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.8 }}
                         style={{ y: 0, x: 0 }}>
-                        {images[3] && (
+                        {images[4] && (
                             <Image
                                 alt="Monochrome Last Photo"
-                                src={images[3].url}
+                                src={images[4].url}
                                 layout="fill"
                                 objectFit="cover"
                             />
@@ -133,10 +133,10 @@ const MonochromeCollectionComponent = ({ collection }: ISlideComponent): JSX.Ele
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.8 }}>
-                            {images[3] && (
+                            {images[4] && (
                                 <Image
                                     alt="Monochrome Last Photo"
-                                    src={images[3].url}
+                                    src={images[4].url}
                                     layout="fill"
                                     objectFit="cover"
                                 />
