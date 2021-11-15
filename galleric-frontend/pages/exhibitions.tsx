@@ -1,15 +1,12 @@
 import React from 'react';
 
-import { PageWrapper } from '../components/PageWrapper';
-
 const Exhibitions = (): JSX.Element => {
     return (
-        <PageWrapper>
-            <div className="flex flex-col w-full bg-gray-900">
-                Empty atm
-                <div style={{ height: 500 }} />
+        <div className="h-screen bg-gray-900">
+            <div className="flex flex-wrap items-center justify-center h-full text-2xl font-thin tracking-widest">
+                Exhibitions section is under development
             </div>
-        </PageWrapper>
+        </div>
     );
 };
 

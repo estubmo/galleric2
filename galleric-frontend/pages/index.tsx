@@ -2,6 +2,7 @@ import axios from 'axios';
 import { GetStaticProps } from 'next';
 import React from 'react';
 
+import Background from '../components/Background';
 import FooterComponent from '../components/FooterComponent';
 import MonochromeCollectionComponent from '../components/MonochromeCollectionComponent';
 import MoroccoCollectionComponent from '../components/MoroccoCollectionComponent';
@@ -43,13 +44,19 @@ const IndexPage = ({ frontpageData }: IFrontpageData): JSX.Element => {
                     sigUrl={frontpageData.sig.url}
                     stampUrl={frontpageData.stamp.url}
                 />
-                {moroccoCollection && <MoroccoCollectionComponent collection={moroccoCollection} />}
-                {monochromeCollection && (
-                    <MonochromeCollectionComponent collection={monochromeCollection} />
-                )}
-                {monochromeCollection && (
-                    <FooterComponent wallpaperUrl={monochromeCollection?.images[1]?.url} />
-                )}
+                <div className="h-screen"></div>
+                <Background colorFrom="#ECE4D4" colorTo="#A2A2A4">
+                    {moroccoCollection && (
+                        <MoroccoCollectionComponent collection={moroccoCollection} />
+                    )}
+
+                    {monochromeCollection && (
+                        <MonochromeCollectionComponent collection={monochromeCollection} />
+                    )}
+                    {monochromeCollection && (
+                        <FooterComponent wallpaperUrl={monochromeCollection?.images[1].url} />
+                    )}
+                </Background>
             </div>
         </PageWrapper>
     );

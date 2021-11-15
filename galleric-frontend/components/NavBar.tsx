@@ -205,6 +205,7 @@ const NavBar = (): JSX.Element => {
                             <AccountButton className="text-gray-100" />
                         </NavBarButton>
                         <NavBarButton
+                            disabled
                             href="?openCart=true"
                             as="/cart"
                             onClick={() => handleSetOpen(false)}>

@@ -1,6 +1,13 @@
-import { motion, Variants } from 'framer-motion';
+import { motion, useSpring, useTransform, useViewportScroll, Variants } from 'framer-motion';
 import Image from 'next/image';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import {
+    parentVariants,
+    slideFromLeftVariants,
+    slideFromRightVariants,
+    slideUpTextVariants
+} from '../constants/variants';
 
 interface IWelcomeComponent {
     wallpaperUrl: string;
@@ -8,65 +15,37 @@ interface IWelcomeComponent {
     stampUrl: string;
 }
 
-const parentVariants: Variants = {
-    visible: {
-        opacity: 1,
-        transition: {
-            when: 'beforeChildren',
-            delayChildren: 1,
-            duration: 2
-        }
-    },
-    hidden: {
-        opacity: 0
-    }
-};
-
-const slideFromLeftVariants: Variants = {
-    onscreen: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            duration: 2,
-            delayChildren: 1.5
-        }
-    },
-    offscreen: {
-        opacity: 0,
-        x: '-50%'
-    }
-};
-const slideFromRightVariants: Variants = {
-    onscreen: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            duration: 2,
-            delayChildren: 1.5
-        }
-    },
-    offscreen: {
-        opacity: 0,
-        x: '50%'
-    }
-};
-
-const slideUpTextVariants: Variants = {
-    onscreen: { opacity: 1, top: 0, transition: { duration: 1 } },
-    offscreen: { opacity: 0, top: 16 }
-};
-
 const WelcomeComponent = ({ wallpaperUrl, sigUrl, stampUrl }: IWelcomeComponent): JSX.Element => {
-    const scrollRef = useRef(null);
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [elementTop, setElementTop] = useState(0);
+    const [elementHeight, setElementHeight] = useState(0);
+
+    const { scrollY } = useViewportScroll();
+
+    const initial = elementTop;
+    const final = (elementTop + elementHeight) / 2;
+    const yRange = useTransform(scrollY, [initial, final], [1, 0]);
+    const ySpring = useSpring(yRange, { stiffness: 400, damping: 90 });
+
+    useEffect(() => {
+        const element = scrollRef.current;
+        if (element) {
+            setElementTop(
+                element.getBoundingClientRect().top + window.scrollY || window.pageYOffset
+            );
+            setElementHeight(element.clientHeight);
+        }
+    }, [scrollRef]);
 
     return (
-        <div className="relative flex justify-center w-full h-screen max-h-screen overflow-hidden min-h-156">
+        <div className="fixed flex justify-center w-full h-screen max-h-screen overflow-hidden min-h-156">
             <motion.section
                 ref={scrollRef}
                 variants={parentVariants}
                 initial="hidden"
                 animate="visible"
-                className="relative z-50 flex flex-col items-center justify-center h-full max-w-sm space-y-4 text-center bg-black md:max-w-screen-sm xl:max-w-screen-lg bg-opacity-20 md:space-y-10">
+                style={{ opacity: ySpring }}
+                className="relative z-10 flex flex-col items-center justify-center h-full max-w-sm space-y-4 text-center bg-black md:max-w-screen-sm xl:max-w-screen-lg bg-opacity-20 md:space-y-10">
                 <motion.div
                     variants={parentVariants}
                     initial="hidden"
@@ -99,16 +78,15 @@ const WelcomeComponent = ({ wallpaperUrl, sigUrl, stampUrl }: IWelcomeComponent)
                         />
                     )}
                 </motion.div>
-
                 <motion.h1
                     variants={slideFromRightVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 'some', root: scrollRef }}
-                    className="relative font-serif text-xl italic tracking-widest md:text-3xl">
+                    className="relative font-serif text-xl italic tracking-widest md:text-xl">
                     &quot;Abstract art has helped us to experience the{' '}
                     <motion.span
-                        className="relative text-2xl md:text-4xl"
+                        className="relative text-xl md:text-2xl"
                         variants={slideUpTextVariants}>
                         emotional power
                     </motion.span>{' '}
@@ -119,7 +97,7 @@ const WelcomeComponent = ({ wallpaperUrl, sigUrl, stampUrl }: IWelcomeComponent)
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 'some', root: scrollRef }}
-                    className="pl-4 font-serif text-xl italic tracking-widest md:text-3xl">
+                    className="pl-4 font-serif text-xl italic tracking-widest md:text-xl">
                     <strong>— Anton Ehrenzweig</strong>
                 </motion.h1>
             </motion.section>

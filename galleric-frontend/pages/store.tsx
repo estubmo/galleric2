@@ -31,35 +31,17 @@ const Store = ({ products }: IProducts): JSX.Element => {
                         variants={containerVariants}
                         className="flex flex-col w-full p-4 m-14 max-w-screen-2xl">
                         <motion.h1
-                            className="text-4xl font-bold tracking-wider"
+                            className="mt-4 text-4xl font-bold tracking-wider"
                             variants={childrenVariants}>
                             Welcome to the store
                         </motion.h1>
                         <motion.h2
-                            className="italic font-light tracking-widest text-gray-200"
+                            className="mt-4 italic font-light tracking-widest text-gray-200"
                             variants={childrenVariants}>
-                            This is a subtitle explaining why what and how this page is used
+                            The store is still under development, but you can browse some of the
+                            paintings that will be available when the store launches.
                         </motion.h2>
 
-                        <motion.p
-                            className="clear-none mt-4 leading-6 tracking-wider font-extralight"
-                            variants={childrenVariants}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus
-                            delectus excepturi numquam atque officia porro quas vitae? Dolorem
-                            pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus
-                            delectus excepturi numquam atque officia porro quas vitae? Dolorem
-                            pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus
-                            delectus excepturi numquam atque officia porro quas vitae? Dolorem
-                            pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus
-                            delectus excepturi numquam atque officia porro quas vitae? Dolorem
-                            pariatur{' '}
-                            <span className="italic font-bold">enim fugiat similique </span>
-                            assumenda ex quae quas et neque harum. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Quam minus delectus excepturi numquam
-                        </motion.p>
                         <motion.div variants={childrenVariants}>
                             <Products products={products} />
                         </motion.div>

@@ -244,7 +244,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                                     <Link
                                         as="/forgot-password"
                                         href={'/forgot-password?email=' + email}>
-                                        <a className="text-blue-600 hover:underline focus-visible:underline focus:outline-none">
+                                        <a className="text-gray-100 hover:underline focus-visible:underline focus:outline-none">
                                             Forgotten password?
                                         </a>
                                     </Link>

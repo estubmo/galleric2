@@ -24,11 +24,9 @@ function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Layout>
-                <SmoothScroll>
-                    <AnimatePresence exitBeforeEnter>
-                        <Component {...pageProps} key={router.route} layoutId={router.route} />
-                    </AnimatePresence>
-                </SmoothScroll>
+                <AnimatePresence exitBeforeEnter>
+                    <Component {...pageProps} key={router.route} layoutId={router.route} />
+                </AnimatePresence>
             </Layout>
         </>
         // </CartProvider>

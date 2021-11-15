@@ -13,7 +13,7 @@ interface Props {
 const Product = ({ product }: Props): JSX.Element => {
     return (
         <motion.div
-            className="m-2 w-full text-gray-100 cursor-pointer"
+            className="w-full m-2 text-gray-100 cursor-pointer"
             initial="hidden"
             animate="visible"
             layoutId={`product-container-${product.slug}`}>
@@ -31,14 +31,14 @@ const Product = ({ product }: Props): JSX.Element => {
                                 layoutId={`product-name-${product.slug}`}>
                                 {product.name}
                             </motion.h2>
-                            <motion.p
+                            {/* <motion.p
                                 className="font-mono"
                                 layoutId={`product-price-${product.slug}`}>
                                 {formatCurrencyString({
                                     value: product.price,
                                     currency: product.currency
                                 })}
-                            </motion.p>
+                            </motion.p> */}
                         </div>
                     </div>
                 </a>

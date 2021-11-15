@@ -90,7 +90,7 @@ const Verify: NextPage = () => {
                                 ! Please check your inbox for a verification link. If you did not
                                 receive an email, try to{' '}
                                 <span
-                                    className="text-blue-600 hover:underline focus-visible:underline focus:outline-none"
+                                    className="text-gray-100 hover:underline focus-visible:underline focus:outline-none"
                                     role="button"
                                     tabIndex={0}
                                     onClick={handleResendEmail}

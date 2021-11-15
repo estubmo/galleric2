@@ -1,30 +1,20 @@
-import {
-    motion,
-    useReducedMotion,
-    useSpring,
-    useTransform,
-    useViewportScroll
-} from 'framer-motion';
+import { motion, useReducedMotion, useTransform, useViewportScroll } from 'framer-motion';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
-type ScaleProps = {
+type BackgroundProps = {
     children: ReactNode;
-    scaleOffset?: number;
+    colorFrom: string;
+    colorTo: string;
 };
-const Scale = ({ children, scaleOffset = 0.2 }: ScaleProps): JSX.Element => {
+const Background = ({ children, colorFrom, colorTo }: BackgroundProps): JSX.Element => {
     const prefersReducedMotion = useReducedMotion();
     const [elementTop, setElementTop] = useState(0);
-    const [clientHeight, setClientHeight] = useState(0);
+    const [elementHeight, setElementHeight] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
 
     const { scrollY } = useViewportScroll();
 
-    const initial = elementTop - clientHeight;
-    const final = elementTop - clientHeight / 4;
-
-    const scaleY = useTransform(scrollY, [initial, final], [1 - scaleOffset, 1 + scaleOffset]);
-    const physics = { damping: 100 };
-    const scaleSpring = useSpring(scaleY, physics);
+    const background = useTransform(scrollY, [elementTop, elementHeight], [colorFrom, colorTo]);
 
     useEffect(() => {
         const element = ref.current;
@@ -33,8 +23,9 @@ const Scale = ({ children, scaleOffset = 0.2 }: ScaleProps): JSX.Element => {
                 setElementTop(
                     element.getBoundingClientRect().top + window.scrollY || window.pageYOffset
                 );
-                setClientHeight(window.innerHeight);
+                setElementHeight(element.clientHeight);
             };
+
             onResize();
             window.addEventListener('resize', onResize);
             return () => window.removeEventListener('resize', onResize);
@@ -46,10 +37,10 @@ const Scale = ({ children, scaleOffset = 0.2 }: ScaleProps): JSX.Element => {
     }
 
     return (
-        <motion.div ref={ref} style={{ scale: scaleSpring }}>
+        <motion.div className="z-20" ref={ref} style={{ backgroundColor: background }}>
             {children}
         </motion.div>
     );
 };
 
-export default Scale;
+export default Background;

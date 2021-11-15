@@ -20,12 +20,23 @@ module.exports = {
     purge: ['./pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'media', // or 'media' or 'class'
     theme: {
-        colors: {
-            gray: colors.warmGray,
-            blue: colors.sky,
-            yellow: colors.amber
-        },
         extend: {
+            colors: {
+                morocco: {
+                    brown: '#A77C55',
+                    white: '#ECE4D4',
+                    yellow: '#E9E069',
+                    olive: '#30381C'
+                },
+                monochrome: {
+                    brown: '#5B5752',
+                    ash: '#CBC5BA',
+                    cloudy: '#B1ADA4',
+                    gray: '#A2A2A4'
+                },
+                blue: colors.sky,
+                yellow: colors.amber
+            },
             boxShadow: {
                 ...makeShadow('cool-gray', '71, 85, 104'),
                 ...makeShadow('gray', '75, 85, 98'),
