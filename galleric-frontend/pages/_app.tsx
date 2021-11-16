@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
         //     currency={config.CURRENCY}>
         <>
             <Head>
-                <title>Galleric</title>
+                <title>Svanhild Stub</title>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
