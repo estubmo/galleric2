@@ -8,7 +8,7 @@ export default function CustomError(): JSX.Element {
     return (
         <div className="bg-gray-900">
             <Head>
-                <title>Galleric | Error</title>
+                <title>Svanhild Stub | Error</title>
                 <meta name="description" content="Error" />
             </Head>
 

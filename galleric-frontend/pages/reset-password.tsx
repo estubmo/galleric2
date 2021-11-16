@@ -40,7 +40,7 @@ const ResetPassword: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Galleric | Reset Password</title>
+                <title>Svanhild Stub | Reset Password</title>
                 <meta name="description" content="Reset Password" />
             </Head>
             <PageWrapper className="items-center justify-center">

@@ -69,7 +69,7 @@ const Verify: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Galleric | Verify Email</title>
+                <title>Svanhild Stub | Verify Email</title>
                 <meta name="description" content="Verify Email" />
             </Head>
             <PageWrapper className="items-center justify-center">

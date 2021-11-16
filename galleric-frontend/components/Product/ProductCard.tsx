@@ -28,9 +28,9 @@ export const ProductCard = ({
             {product && (
                 <div className="fixed w-full">
                     <motion.div
-                        className="fixed top-0 left-0 flex justify-center w-full mt-24 text-gray-100 h-100v md:h-80v"
+                        className="fixed top-0 left-0 flex justify-center w-full text-gray-100 md:mt-24 h-100v md:h-80v"
                         layoutId={`product-container-${product.slug}`}>
-                        <div className="overflow-hidden bg-gray-800 md:w-60v">
+                        <div className="m-6 overflow-hidden bg-gray-800 lg:w-80v xl:max-w-screen-lg">
                             <PerfectScrollbar
                                 options={{ wheelPropagation: false }}
                                 // eslint-disable-next-line @typescript-eslint/no-explicit-any

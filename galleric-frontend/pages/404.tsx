@@ -8,7 +8,7 @@ export default function Custom404(): JSX.Element {
     return (
         <div className="bg-gray-900">
             <Head>
-                <title>Galleric | 404</title>
+                <title>Svanhild Stub | 404</title>
                 <meta name="description" content="404 - Page Not Found" />
             </Head>
 

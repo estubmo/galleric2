@@ -102,7 +102,7 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
     return (
         <>
             <Head>
-                <title>Galleric | Sign {sign}</title>
+                <title>Svanhild Stub | Sign {sign}</title>
                 <meta name="description" content={`Sign ${sign}`} />
             </Head>
             <PageWrapper className="items-center justify-center">

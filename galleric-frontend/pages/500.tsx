@@ -8,7 +8,7 @@ export default function Custom500(): JSX.Element {
     return (
         <div className="bg-gray-900">
             <Head>
-                <title>Galleric | 500</title>
+                <title>Svanhild Stub | 500</title>
                 <meta name="description" content="500 - Page Not Found" />
             </Head>
 

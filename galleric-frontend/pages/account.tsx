@@ -49,7 +49,7 @@ const Account: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Galleric | Account</title>
+                <title>Svanhild Stub | Account</title>
                 <meta name="description" content="The account page, view your orders"></meta>
             </Head>
 
