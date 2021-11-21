@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import React from 'react';
 
 import { PageWrapper } from '../components/PageWrapper';
@@ -24,93 +25,34 @@ const About = (): JSX.Element => {
                     Why abstract art is more than just emotion
                 </motion.h2>
 
-                <motion.p
-                    className="clear-none mt-4 leading-6 tracking-wider font-extralight"
-                    variants={childrenVariants}>
-                    <motion.img
+                <div className="clear-none mt-4 leading-6 tracking-wider font-extralight">
+                    <motion.div
                         variants={childrenVariants}
-                        className="float-right object-cover mx-4 h-82 w-72"
-                        src="/images/svanhild.jpg"
-                        alt="svanhild"
-                    />
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur enim fugiat
-                    similique assumenda ex quae quas et neque harum. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Quam minus delectus excepturi numquam atque
-                    officia porro quas vitae? Dolorem pariatur enim fugiat similique assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam atque officia porro quas vitae?
-                    Dolorem pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur{' '}
-                    <span className="italic font-bold">enim fugiat similique </span>assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Quam minus delectus excepturi numquam atque
-                    officia porro quas vitae? Dolorem pariatur enim fugiat similique assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam atque officia porro quas vitae?
-                    Dolorem pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur enim fugiat
-                    similique assumenda ex quae quas et neque harum. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Quam minus delectus excepturi numquam atque
-                    officia porro quas vitae? Dolorem pariatur{' '}
-                    <span className="italic font-bold">enim fugiat similique </span>assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam
-                </motion.p>
-                <motion.p
-                    className="mt-4 leading-6 tracking-wider font-extralight"
-                    variants={childrenVariants}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur enim fugiat
-                    similique assumenda ex quae quas et neque harum. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Quam minus delectus excepturi numquam atque
-                    officia porro quas vitae? Dolorem pariatur enim fugiat similique assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam atque officia porro quas vitae?
-                    Dolorem pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur{' '}
-                    <span className="italic font-bold">enim fugiat similique </span>assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam
-                </motion.p>
-                <motion.p
-                    className="mt-4 leading-6 tracking-wider font-extralight"
-                    variants={childrenVariants}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur enim fugiat
-                    similique assumenda ex quae quas et neque harum. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Quam minus delectus excepturi numquam atque
-                    officia porro quas vitae? Dolorem pariatur enim fugiat similique assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam atque officia porro quas vitae?
-                    Dolorem pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur{' '}
-                    <span className="italic font-bold">enim fugiat similique </span>assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam
-                </motion.p>
-                <motion.p
-                    className="mt-4 leading-6 tracking-wider font-extralight"
-                    variants={childrenVariants}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur enim fugiat
-                    similique assumenda ex quae quas et neque harum. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Quam minus delectus excepturi numquam atque
-                    officia porro quas vitae? Dolorem pariatur enim fugiat similique assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam atque officia porro quas vitae?
-                    Dolorem pariatur enim fugiat similique assumenda ex quae quas et neque harum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minus delectus
-                    excepturi numquam atque officia porro quas vitae? Dolorem pariatur{' '}
-                    <span className="italic font-bold">enim fugiat similique </span>assumenda ex
-                    quae quas et neque harum. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Quam minus delectus excepturi numquam
-                </motion.p>
+                        className="relative float-right mx-4 h-80 w-72">
+                        <Image
+                            layout="fill"
+                            objectFit="contain"
+                            src="/images/svanhild.jpg"
+                            alt="svanhild"
+                        />
+                    </motion.div>
+                    <motion.p
+                        className="mt-4 leading-6 tracking-wider font-extralight"
+                        variants={childrenVariants}>
+                        Norwegian artist <span className="italic font-bold">Svanhild Stub</span>{' '}
+                        lives through her art. Hailing from the rugged island of{' '}
+                        <span className="italic font-bold">Frøya </span> in northern Norway, where
+                        the nature is raw and unforgiving, finding beauty wherever it presents
+                        itself comes naturally to her. This is reflected in her art.
+                    </motion.p>
+                    <motion.p
+                        className="mt-4 leading-6 tracking-wider font-extralight"
+                        variants={childrenVariants}>
+                        Currently a resident of Andalusia, Spain, there is no lack of inspiration in
+                        the scenery. Svanhild regularly puts on paper anything that resonates with
+                        her, be it abstract or concrete.
+                    </motion.p>
+                </div>
             </motion.div>
         </PageWrapper>
     );
