@@ -37,28 +37,24 @@ const IndexPage = ({ frontpageData }: IFrontpageData): JSX.Element => {
     const monochromeCollection = frontpageData.collections.find((c) => c.title === 'monochrome');
 
     return (
-        <PageWrapper>
-            <div className="flex flex-col w-full max-h-full">
-                <WelcomeComponent
-                    wallpaperUrl={frontpageData.wallpaper.url}
-                    sigUrl={frontpageData.sig.url}
-                    stampUrl={frontpageData.stamp.url}
-                />
-                <div className="h-screen"></div>
-                <Background colorFrom="#ECE4D4" colorTo="#A2A2A4">
-                    {moroccoCollection && (
-                        <MoroccoCollectionComponent collection={moroccoCollection} />
-                    )}
+        <div className="flex flex-col w-full max-h-full">
+            <WelcomeComponent
+                wallpaperUrl={frontpageData.wallpaper.url}
+                sigUrl={frontpageData.sig.url}
+                stampUrl={frontpageData.stamp.url}
+            />
+            <div className="h-screen"></div>
+            <Background colorFrom="#ECE4D4" colorTo="#A2A2A4">
+                {moroccoCollection && <MoroccoCollectionComponent collection={moroccoCollection} />}
 
-                    {monochromeCollection && (
-                        <MonochromeCollectionComponent collection={monochromeCollection} />
-                    )}
-                    {monochromeCollection && (
-                        <FooterComponent wallpaperUrl={monochromeCollection?.images[3].url} />
-                    )}
-                </Background>
-            </div>
-        </PageWrapper>
+                {monochromeCollection && (
+                    <MonochromeCollectionComponent collection={monochromeCollection} />
+                )}
+                {monochromeCollection && (
+                    <FooterComponent wallpaperUrl={monochromeCollection?.images[3].url} />
+                )}
+            </Background>
+        </div>
     );
 };
 

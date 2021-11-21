@@ -10,7 +10,9 @@ const Layout = ({ children }: Props): JSX.Element => {
     return (
         <>
             <NavBar />
-            <div className="text-gray-100 font-sans bg-gray-900">{children}</div>
+            <div className="flex justify-center w-full font-sans text-gray-100 bg-gray-900">
+                {children}
+            </div>
         </>
     );
 };

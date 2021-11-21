@@ -7,13 +7,13 @@ import { childrenVariants, containerVariants } from '../utils/variants';
 
 const About = (): JSX.Element => {
     return (
-        <PageWrapper>
+        <PageWrapper className="justify-center w-full h-screen max-w-screen-xl">
             <motion.div
                 initial="hidden"
                 animate="visible"
                 exit="exit"
                 variants={containerVariants}
-                className="flex flex-col w-full max-w-screen-xl p-4 m-14">
+                className="flex flex-col w-full p-4 mt-24">
                 <motion.h1
                     className="text-4xl font-bold tracking-wider"
                     variants={childrenVariants}>
