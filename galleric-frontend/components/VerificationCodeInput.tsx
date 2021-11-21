@@ -16,6 +16,7 @@ const KEY = {
 interface IValidationCodeInputProps {
     type?: 'text' | 'number';
     onComplete: (val: string) => void;
+    value: string | string[];
     fields?: number;
     isLoading?: boolean;
     fieldWidth?: number;
@@ -28,6 +29,7 @@ export const VerificationCodeInput = ({
     fieldHeight = 54,
     fieldWidth = 58,
     fields = 6,
+    value = '',
     onComplete,
     type = 'number'
 }: IValidationCodeInputProps): JSX.Element => {
@@ -39,8 +41,21 @@ export const VerificationCodeInput = ({
     const id = +new Date();
 
     const [values, setValues] = useState(Array(fields).fill(undefined));
+
     const [selectedIndex, setSelectedIndex] = useState(0);
     const itemsRef = useRef<Array<HTMLInputElement | null>>(Array(fields).fill(React.createRef()));
+
+    useEffect(() => {
+        if (value && value.length > 0) {
+            const valueArray = Array.from(value);
+            const attempt = Array(fields).fill(undefined);
+            for (let i = 0; i < valueArray.length && i < attempt.length; i++) {
+                attempt[i] = valueArray[i];
+            }
+            setValues(attempt);
+            setSelectedIndex(valueArray.length);
+        }
+    }, [value, fields]);
 
     useEffect(() => {
         itemsRef.current = itemsRef.current.slice(0, fields);
@@ -140,7 +155,7 @@ export const VerificationCodeInput = ({
             <AnimateSharedLayout>
                 {values &&
                     values.map((value, index) => (
-                        <motion.div className="mx-1" key={`${id}-${index}`}>
+                        <motion.div layout className="mx-1" key={`${id}-${index}`}>
                             <motion.input
                                 className="text-center text-gray-100 bg-gray-900 border-b border-gray-400 focus:outline-none"
                                 type={type === 'number' ? 'tel' : type}

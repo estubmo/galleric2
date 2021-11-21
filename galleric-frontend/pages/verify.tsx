@@ -2,7 +2,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -20,6 +20,8 @@ const Verify: NextPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [resent, setResent] = useState(false);
+    const router = useRouter();
+    const { code = '' } = router.query;
 
     const {
         data = {
@@ -33,9 +35,9 @@ const Verify: NextPage = () => {
     useEffect(() => {
         if (data && data.confirmed) {
             setRefreshInterval(0);
-            Router.push('/');
+            router.push('/');
         }
-    }, [data]);
+    }, [data, router]);
 
     const handleComplete = useCallback(
         async (val: string) => {
@@ -107,6 +109,7 @@ const Verify: NextPage = () => {
                             className="flex flex-col items-center mt-4">
                             <div className="mb-1">Or enter your verification code here:</div>
                             <VerificationCodeInput
+                                value={code}
                                 type="number"
                                 fieldWidth={42}
                                 fieldHeight={42}

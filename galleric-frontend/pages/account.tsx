@@ -66,7 +66,7 @@ const Account: NextPage = () => {
                             <span className="ml-2 text-yellow-400">
                                 Please{' '}
                                 <Link href="/verify">
-                                    <a className="text-gray-100 hover:underline focus-visible:underline focus:outline-none">
+                                    <a className="text-blue-900 hover:underline focus-visible:underline focus:outline-none">
                                         verify
                                     </a>
                                 </Link>{' '}

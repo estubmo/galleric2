@@ -169,7 +169,7 @@ const MoroccoCollectionComponent = ({ collection }: ISlideComponent): JSX.Elemen
                                 whileInView="onscreen"
                                 viewport={{ once: false, amount: 'some' }}
                                 className="pl-4 font-serif text-xl italic tracking-widest text-right">
-                                <strong>— Rochelle Carr</strong>
+                                <strong className="text-morocco-white">— Rochelle Carr</strong>
                             </motion.h1>
                         </motion.div>
                     </div>
