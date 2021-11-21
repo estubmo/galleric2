@@ -1,3 +1,4 @@
 module.exports = ({ env }) => ({
-  URL: env("FRONTEND_URL"),
+  url: env("VAR_HEROKU_URL"),
+  frontendUrl: env("FRONTEND_URL"),
 });

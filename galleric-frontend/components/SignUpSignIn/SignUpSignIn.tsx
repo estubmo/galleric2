@@ -105,11 +105,11 @@ export const SignUpSignIn = ({ sign }: SignUpSignInProps): JSX.Element => {
                 <title>Svanhild Stub | Sign {sign}</title>
                 <meta name="description" content={`Sign ${sign}`} />
             </Head>
-            <PageWrapper className="items-center justify-center">
+            <PageWrapper className="items-center">
                 <AnimateSharedLayout>
                     <AnimatePresence exitBeforeEnter>
                         <motion.form
-                            className="flex flex-col items-start max-w-lg font-light tracking-widest h-50v md:w-2/3"
+                            className="flex flex-col items-start w-full font-light tracking-widest h-50v "
                             onSubmit={handleSubmit}
                             key="signInUpForm">
                             <motion.h2

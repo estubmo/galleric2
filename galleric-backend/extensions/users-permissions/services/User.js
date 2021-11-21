@@ -146,7 +146,7 @@ module.exports = {
     await this.edit({ id: user.id }, { confirmationToken });
 
     settings.message = await userPermissionService.template(settings.message, {
-      URL: `${getAbsoluteServerUrl(strapi.config)}/verify`,
+      URL: `${strapi.config.server.frontendUrl}/verify`,
       USER: userInfo,
       CODE: confirmationToken,
     });
