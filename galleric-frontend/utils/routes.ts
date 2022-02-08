@@ -3,5 +3,5 @@ export const routes = [
     { name: 'exhibitions', path: '/exhibitions' },
     { name: 'courses', path: '/courses' },
     { name: 'about', path: '/about' },
-    { name: 'store', path: '/store' }
+    { name: 'gallery', path: '/gallery' }
 ];

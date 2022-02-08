@@ -11,7 +11,7 @@ import { IProduct, IProducts } from '../model/product';
 import { API_URL } from '../utils/urls';
 import { childrenVariants, containerVariants } from '../utils/variants';
 
-const Store = ({ products }: IProducts): JSX.Element => {
+const Gallery = ({ products }: IProducts): JSX.Element => {
     const router = useRouter();
     const [selectedProduct, setSelectedProduct] = useState<IProduct>(products[0]);
     useEffect(() => {
@@ -30,18 +30,6 @@ const Store = ({ products }: IProducts): JSX.Element => {
                         exit="exit"
                         variants={containerVariants}
                         className="flex flex-col w-full p-14 max-w-screen-2xl">
-                        <motion.h1
-                            className="mt-4 text-4xl font-bold tracking-wider"
-                            variants={childrenVariants}>
-                            Welcome to the store
-                        </motion.h1>
-                        <motion.h2
-                            className="mt-4 italic font-light tracking-widest text-gray-200"
-                            variants={childrenVariants}>
-                            The store is still under development, but you can browse some of the
-                            paintings that will be available when the store launches.
-                        </motion.h2>
-
                         <motion.div variants={childrenVariants}>
                             <Products products={products} />
                         </motion.div>
@@ -62,4 +50,4 @@ export const getStaticProps: GetStaticProps = async () => {
     return { props: { products }, revalidate: 60 };
 };
 
-export default Store;
+export default Gallery;

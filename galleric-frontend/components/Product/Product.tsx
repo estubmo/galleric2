@@ -23,14 +23,13 @@ const Product = ({ product }: Props): JSX.Element => {
                         src={fromImageToUrl(product.images[0])}
                         alt={product.name}
                     />
-                    <div className="p-4">
-                        <div className="flex justify-between">
-                            <motion.h2
-                                className="font-bold"
-                                layoutId={`product-name-${product.slug}`}>
-                                {product.name}
-                            </motion.h2>
-                            {/* <motion.p
+                    <div className="flex justify-between">
+                        <motion.h3
+                            className="font-mono text-sm tracking-widest uppercase md:text-base"
+                            layoutId={`product-name-${product.slug}`}>
+                            {product.name}
+                        </motion.h3>
+                        {/* <motion.p
                                 className="font-mono"
                                 layoutId={`product-price-${product.slug}`}>
                                 {formatCurrencyString({
@@ -38,7 +37,6 @@ const Product = ({ product }: Props): JSX.Element => {
                                     currency: product.currency
                                 })}
                             </motion.p> */}
-                        </div>
                     </div>
                 </a>
             </Link>
