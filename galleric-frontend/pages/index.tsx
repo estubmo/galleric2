@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const res = await axios.get(`${API_URL}/frontpage/`);
     const frontpageData = res.data;
 
-    return { props: { frontpageData } };
+    return { props: { frontpageData }, revalidate: 3600 };
 };
 
 export default IndexPage;

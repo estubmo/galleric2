@@ -21,7 +21,14 @@ interface IAboutData {
 }
 
 const About = ({ aboutData }: IAboutData): JSX.Element => {
-    const { title = '', subtitle = '', portrait, content = '' } = aboutData;
+    console.log(
+        '%cRetNemt%cline:23%caboutData',
+        'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+        'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+        'color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px',
+        aboutData
+    );
+    const { title = '', subtitle = '', portrait, content = '' } = aboutData || {};
     const paragraphs = content?.split('\n');
 
     return (
@@ -74,7 +81,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const res = await axios.get(`${API_URL}/about/`);
     const aboutData = res.data;
 
-    return { props: { aboutData } };
+    return { props: { aboutData }, revalidate: 3600 };
 };
 
 export default About;
