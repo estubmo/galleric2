@@ -1,11 +1,29 @@
+import axios from 'axios';
 import { motion } from 'framer-motion';
+import { GetStaticProps } from 'next';
 import Image from 'next/image';
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import { PageWrapper } from '../components/PageWrapper';
+import { API_URL, fromImageToUrl } from '../utils/urls';
 import { childrenVariants, containerVariants } from '../utils/variants';
 
-const About = (): JSX.Element => {
+interface IAboutData {
+    aboutData: {
+        portrait: {
+            url: string;
+        };
+        title: string;
+        subtitle: string;
+        content: string;
+    };
+}
+
+const About = ({ aboutData }: IAboutData): JSX.Element => {
+    const { title, subtitle, portrait, content } = aboutData;
+    const paragraphs = content.split('\n');
+
     return (
         <PageWrapper className="justify-center w-full h-screen max-w-screen-xl">
             <motion.div
@@ -17,12 +35,12 @@ const About = (): JSX.Element => {
                 <motion.h1
                     className="text-4xl font-bold tracking-wider"
                     variants={childrenVariants}>
-                    About Svanhild Stub
+                    {title}
                 </motion.h1>
                 <motion.h2
                     className="italic font-light tracking-widest text-gray-200"
                     variants={childrenVariants}>
-                    Why abstract art is more than just emotion
+                    {subtitle}
                 </motion.h2>
 
                 <div className="clear-none mt-4 leading-6 tracking-wider font-extralight">
@@ -31,31 +49,30 @@ const About = (): JSX.Element => {
                         className="relative float-right mx-4 h-80 w-72">
                         <Image
                             layout="fill"
-                            objectFit="contain"
-                            src="/images/svanhild.jpg"
-                            alt="svanhild"
+                            objectFit="cover"
+                            src={fromImageToUrl(portrait)}
+                            alt="portrait"
                         />
                     </motion.div>
-                    <motion.p
-                        className="mt-4 leading-6 tracking-wider font-extralight"
-                        variants={childrenVariants}>
-                        Norwegian artist <span className="italic font-bold">Svanhild Stub</span>{' '}
-                        lives through her art. Hailing from the rugged island of{' '}
-                        <span className="italic font-bold">Frøya </span> in northern Norway, where
-                        the nature is raw and unforgiving, finding beauty wherever it presents
-                        itself comes naturally to her. This is reflected in her art.
-                    </motion.p>
-                    <motion.p
-                        className="mt-4 leading-6 tracking-wider font-extralight"
-                        variants={childrenVariants}>
-                        Currently a resident of Andalusia, Spain, there is no lack of inspiration in
-                        the scenery. Svanhild regularly puts on paper anything that resonates with
-                        her, be it abstract or concrete.
-                    </motion.p>
+                    {paragraphs.map((paragraph, index) => (
+                        <motion.p
+                            key={index}
+                            className="mt-4 leading-6 tracking-wider font-extralight"
+                            variants={childrenVariants}>
+                            <ReactMarkdown>{paragraph}</ReactMarkdown>
+                        </motion.p>
+                    ))}
                 </div>
             </motion.div>
         </PageWrapper>
     );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+    const res = await axios.get(`${API_URL}/about/`);
+    const aboutData = res.data;
+
+    return { props: { aboutData } };
 };
 
 export default About;
