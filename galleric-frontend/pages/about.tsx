@@ -21,8 +21,8 @@ interface IAboutData {
 }
 
 const About = ({ aboutData }: IAboutData): JSX.Element => {
-    const { title, subtitle, portrait, content } = aboutData;
-    const paragraphs = content.split('\n');
+    const { title = '', subtitle = '', portrait, content = '' } = aboutData;
+    const paragraphs = content?.split('\n');
 
     return (
         <PageWrapper className="justify-center w-full h-screen max-w-screen-xl">
@@ -44,16 +44,18 @@ const About = ({ aboutData }: IAboutData): JSX.Element => {
                 </motion.h2>
 
                 <div className="clear-none mt-4 leading-6 tracking-wider font-extralight">
-                    <motion.div
-                        variants={childrenVariants}
-                        className="relative float-right mx-4 h-80 w-72">
-                        <Image
-                            layout="fill"
-                            objectFit="cover"
-                            src={fromImageToUrl(portrait)}
-                            alt="portrait"
-                        />
-                    </motion.div>
+                    {portrait && (
+                        <motion.div
+                            variants={childrenVariants}
+                            className="relative float-right mx-4 h-80 w-72">
+                            <Image
+                                layout="fill"
+                                objectFit="cover"
+                                src={fromImageToUrl(portrait)}
+                                alt="portrait"
+                            />
+                        </motion.div>
+                    )}
                     {paragraphs.map((paragraph, index) => (
                         <motion.p
                             key={index}
