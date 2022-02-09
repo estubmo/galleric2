@@ -22,14 +22,22 @@ export const PaintingCard = ({
 }: PaintingCardProps): JSX.Element => {
     const { images } = painting;
     const firstImage = images.find((x) => x !== undefined);
-    const [loadingImage, setLoadingImage] = useState(firstImage);
-    const [selectedImage, setSelectedImage] = useState(firstImage);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadingImage, setLoadingImage] = useState<IImage | undefined>(firstImage);
+    const [selectedImage, setSelectedImage] = useState<IImage | undefined>(firstImage);
+
     const handleSetSelectedImage = (image: IImage): void => {
-        setLoadingImage(image);
+        if (!isLoading) {
+            setLoadingImage(image);
+            setIsLoading(true);
+        }
     };
     const handleLoadingComplete = (): void => {
-        setSelectedImage(loadingImage);
-        setLoadingImage(undefined);
+        if (isLoading) {
+            setSelectedImage(loadingImage);
+            setLoadingImage(undefined);
+            setIsLoading(false);
+        }
     };
 
     const router = useRouter();
