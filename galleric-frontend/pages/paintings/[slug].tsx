@@ -30,7 +30,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const painting_res = await axios.get(`${API_URL}/paintings/?slug=${slug}`);
     const found = await painting_res.data;
-    console.log('found', found);
 
     return {
         props: {
@@ -42,12 +41,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export const getStaticPaths: GetStaticPaths = async () => {
     const response: AxiosResponse = await axios.get(`${API_URL}/paintings/`);
     const { data = [] }: { data: [] } = response;
-    console.log('data', data);
 
     return {
         paths: data.map((painting: IPainting) => ({
             params: { slug: String(painting.slug) }
         })),
-        fallback: true
+        fallback: false
     };
 };
