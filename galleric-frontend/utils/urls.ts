@@ -6,5 +6,6 @@ export const fromImageToUrl = (image: IImage, format: IMAGE_FORMATS): string => 
     if (image.url.indexOf('/') === 0) {
         return `${API_URL}${image.formats[format].url}`;
     }
-    return image.url;
+
+    return image.formats[format].url;
 };

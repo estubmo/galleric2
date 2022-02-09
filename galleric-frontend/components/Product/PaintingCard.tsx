@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
-import { IPainting } from '../../model/product';
+import { IImage, IPainting } from '../../model/product';
 import { CloseButton } from '../CloseButton';
 import { ItemImage } from './ItemImage';
 import { ItemImageSelector } from './ItemImageSelector';
@@ -22,7 +22,16 @@ export const PaintingCard = ({
 }: PaintingCardProps): JSX.Element => {
     const { images } = painting;
     const firstImage = images.find((x) => x !== undefined);
+    const [loadingImage, setLoadingImage] = useState(firstImage);
     const [selectedImage, setSelectedImage] = useState(firstImage);
+    const handleSetSelectedImage = (image: IImage): void => {
+        setLoadingImage(image);
+    };
+    const handleLoadingComplete = (): void => {
+        setSelectedImage(loadingImage);
+        setLoadingImage(undefined);
+    };
+
     const router = useRouter();
 
     return (
@@ -64,11 +73,16 @@ export const PaintingCard = ({
                                     )}
                                 </div>
                                 {/* TODO: Add image zoom/scroll wrapper */}
-                                <ItemImage slug={painting.slug} image={selectedImage} />
+                                <ItemImage
+                                    slug={painting.slug}
+                                    image={selectedImage}
+                                    loadingImage={loadingImage}
+                                    onLoadingComplete={handleLoadingComplete}
+                                />
                                 <ItemImageSelector
                                     images={painting.images}
-                                    selectedImage={selectedImage}
-                                    setSelectedImage={setSelectedImage}
+                                    selectedImage={loadingImage || selectedImage}
+                                    setSelectedImage={handleSetSelectedImage}
                                 />
                                 <div className="p-4">
                                     <div className="flex justify-between">

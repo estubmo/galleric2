@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import React from 'react';
 
 import { IImage, IMAGE_FORMATS } from '../../model/product';
@@ -8,7 +9,7 @@ import { fromImageToUrl } from '../../utils/urls';
 interface ItemImageSelectorProps {
     images?: Array<IImage>;
     selectedImage?: IImage;
-    setSelectedImage: React.Dispatch<React.SetStateAction<IImage | undefined>>;
+    setSelectedImage: (image: IImage) => void;
 }
 
 export const ItemImageSelector = ({
@@ -25,16 +26,20 @@ export const ItemImageSelector = ({
                         className="focus-visible:underline focus:outline-none"
                         key={'painting-image-' + image.id}
                         onClick={() => setSelectedImage(image)}>
-                        <motion.img
+                        <motion.div
                             className={clsx(
-                                'm-2 w-14 h-14 border border-transparent object-cover',
+                                'relative m-2 w-14 h-14 border border-transparent object-cover',
                                 {
                                     'border-gray-100': selectedImage?.name === image.name
                                 }
-                            )}
-                            src={fromImageToUrl(image, IMAGE_FORMATS.THUMBNAIL)}
-                            alt={image.alternativeText}
-                        />
+                            )}>
+                            <Image
+                                layout="fill"
+                                objectFit="cover"
+                                src={fromImageToUrl(image, IMAGE_FORMATS.THUMBNAIL)}
+                                alt={image.alternativeText}
+                            />
+                        </motion.div>
                     </button>
                 );
             })}
