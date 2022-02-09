@@ -32,9 +32,7 @@ export const ItemImage = ({
                 width={image.width}
                 height={image.height}
                 onLoadingComplete={onLoadingComplete}
-                src={fromImageToUrl(loadingImage || image, IMAGE_FORMATS.MEDIUM)}
-                blurDataURL={fromImageToUrl(loadingImage || image, IMAGE_FORMATS.THUMBNAIL)}
-                placeholder="blur"
+                src={fromImageToUrl(loadingImage || image, IMAGE_FORMATS.LARGE)}
                 quality={80}
                 alt={image.alternativeText}
             />
