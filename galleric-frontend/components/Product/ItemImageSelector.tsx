@@ -8,7 +8,7 @@ import { fromImageToUrl } from '../../utils/urls';
 
 interface ItemImageSelectorProps {
     images?: Array<IImage>;
-    selectedImage?: IImage;
+    selectedImage: IImage | null;
     setSelectedImage: (image: IImage) => void;
 }
 

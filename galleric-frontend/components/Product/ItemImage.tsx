@@ -7,8 +7,8 @@ import { IImage, IMAGE_FORMATS } from '../../model/product';
 import { fromImageToUrl } from '../../utils/urls';
 
 interface ItemImageProps {
-    image?: IImage;
-    loadingImage?: IImage;
+    image: IImage | null;
+    loadingImage: IImage | null;
     slug: string;
     onLoadingComplete: () => void;
 }
