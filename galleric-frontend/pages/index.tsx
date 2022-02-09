@@ -6,7 +6,6 @@ import Background from '../components/Background';
 import FooterComponent from '../components/FooterComponent';
 import MonochromeCollectionComponent from '../components/MonochromeCollectionComponent';
 import MoroccoCollectionComponent from '../components/MoroccoCollectionComponent';
-import { PageWrapper } from '../components/PageWrapper';
 import WelcomeComponent from '../components/WelcomeComponent';
 import { IImage } from '../model/product';
 import { API_URL } from '../utils/urls';
