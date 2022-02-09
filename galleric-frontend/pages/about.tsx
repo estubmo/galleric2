@@ -21,18 +21,11 @@ interface IAboutData {
 }
 
 const About = ({ aboutData }: IAboutData): JSX.Element => {
-    console.log(
-        '%cRetNemt%cline:23%caboutData',
-        'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
-        'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
-        'color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px',
-        aboutData
-    );
     const { title = '', subtitle = '', portrait, content = '' } = aboutData || {};
     const paragraphs = content?.split('\n');
 
     return (
-        <PageWrapper className="justify-center w-full h-screen max-w-screen-xl">
+        <PageWrapper className="justify-center w-full h-full max-w-screen-xl">
             <motion.div
                 initial="hidden"
                 animate="visible"
