@@ -21,15 +21,15 @@ export const PaintingCard = ({
     returnHref = ''
 }: PaintingCardProps): JSX.Element => {
     const { images } = painting;
-    const firstImage = images.find((x) => x !== undefined) || null;
-    const [loadingImage, setLoadingImage] = useState<IImage | null>(firstImage);
-    const [selectedImage, setSelectedImage] = useState<IImage | null>(firstImage);
+    const firstImage = images.find((x) => x !== undefined);
+    const [loadingImage, setLoadingImage] = useState(firstImage);
+    const [selectedImage, setSelectedImage] = useState(firstImage);
     const handleSetSelectedImage = (image: IImage): void => {
         setLoadingImage(image);
     };
     const handleLoadingComplete = (): void => {
         setSelectedImage(loadingImage);
-        setLoadingImage(null);
+        setLoadingImage(undefined);
     };
 
     const router = useRouter();
