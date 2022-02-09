@@ -14,43 +14,13 @@
     "name": {
       "type": "string"
     },
-    "images": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "files",
-        "images",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": true,
-      "pluginOptions": {}
-    },
-    "content": {
-      "type": "richtext"
-    },
-    "meta_description": {
-      "type": "text"
-    },
-    "meta_title": {
-      "type": "text"
-    },
     "price": {
       "type": "decimal",
       "required": true
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "name",
-      "required": true
-    },
     "currency": {
       "type": "enumeration",
-      "enum": [
-        "USD",
-        "EUR",
-        "NOK"
-      ],
+      "enum": ["USD", "EUR", "NOK"],
       "default": "EUR",
       "required": true
     },
@@ -60,6 +30,18 @@
     },
     "discount": {
       "type": "decimal"
+    },
+    "painting": {
+      "via": "product",
+      "model": "painting"
+    },
+    "print": {
+      "via": "product",
+      "model": "print"
+    },
+    "course": {
+      "via": "product",
+      "model": "course"
     }
   }
 }

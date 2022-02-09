@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prints",
+  "info": {
+    "name": "Print",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "painting": {
+      "via": "print",
+      "model": "painting"
+    },
+    "product": {
+      "model": "product",
+      "via": "print"
+    }
+  }
+}
