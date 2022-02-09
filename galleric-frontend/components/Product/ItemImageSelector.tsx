@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-import { IImage } from '../../model/product';
+import { IImage, IMAGE_FORMATS } from '../../model/product';
 import { fromImageToUrl } from '../../utils/urls';
 
 interface ItemImageSelectorProps {
@@ -32,7 +32,7 @@ export const ItemImageSelector = ({
                                     'border-gray-100': selectedImage?.name === image.name
                                 }
                             )}
-                            src={fromImageToUrl(image)}
+                            src={fromImageToUrl(image, IMAGE_FORMATS.THUMBNAIL)}
                             alt={image.alternativeText}
                         />
                     </button>

@@ -6,14 +6,13 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { PageWrapper } from '../components/PageWrapper';
+import { IImage, IMAGE_FORMATS } from '../model/product';
 import { API_URL, fromImageToUrl } from '../utils/urls';
 import { childrenVariants, containerVariants } from '../utils/variants';
 
 interface IAboutData {
     aboutData: {
-        portrait: {
-            url: string;
-        };
+        portrait: IImage;
         title: string;
         subtitle: string;
         content: string;
@@ -51,7 +50,7 @@ const About = ({ aboutData }: IAboutData): JSX.Element => {
                             <Image
                                 layout="fill"
                                 objectFit="cover"
-                                src={fromImageToUrl(portrait)}
+                                src={fromImageToUrl(portrait, IMAGE_FORMATS.MEDIUM)}
                                 alt="portrait"
                                 quality={50}
                             />

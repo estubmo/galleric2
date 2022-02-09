@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 
-import { IPainting } from '../../model/product';
+import { IMAGE_FORMATS, IPainting } from '../../model/product';
 import { fromImageToUrl } from '../../utils/urls';
 
 interface Props {
@@ -22,8 +22,8 @@ const Painting = ({ painting }: Props): JSX.Element => {
                 scroll={false}>
                 <a>
                     <motion.img
-                        layoutId={`painting-img-${painting.slug}`}
-                        src={fromImageToUrl(painting.images[0])}
+                        layoutId={`item-img-${painting.slug}`}
+                        src={fromImageToUrl(painting.images[0], IMAGE_FORMATS.SMALL)}
                         alt={painting.name}
                     />
                     <div className="flex justify-between">

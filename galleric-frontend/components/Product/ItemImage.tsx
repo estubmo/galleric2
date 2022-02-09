@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
 
-import { IImage } from '../../model/product';
+import { IImage, IMAGE_FORMATS } from '../../model/product';
 import { fromImageToUrl } from '../../utils/urls';
 
 interface ItemImageProps {
@@ -19,7 +19,7 @@ export const ItemImage = ({ slug, image }: ItemImageProps): JSX.Element => {
                 layout="responsive"
                 width={image.width}
                 height={image.height}
-                src={fromImageToUrl(image)}
+                src={fromImageToUrl(image, IMAGE_FORMATS.LARGE)}
                 alt={image.alternativeText}
             />
         </motion.div>

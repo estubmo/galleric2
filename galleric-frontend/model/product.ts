@@ -14,6 +14,32 @@ export interface IImage {
     width: number;
     height: number;
     url: string;
+    formats: IImageFormat;
+}
+
+export interface IImageFormat {
+    thumbnail: IImageSizeFormat;
+    small: IImageSizeFormat;
+    medium: IImageSizeFormat;
+    large: IImageSizeFormat;
+}
+
+export interface IImageSizeFormat {
+    name: string;
+    ext: string;
+    hash: string;
+    height: number;
+    width: number;
+    size: number;
+    url: string;
+    mine: string;
+}
+
+export enum IMAGE_FORMATS {
+    THUMBNAIL = 'thumbnail',
+    SMALL = 'small',
+    MEDIUM = 'medium',
+    LARGE = 'large'
 }
 
 export interface IProduct {
