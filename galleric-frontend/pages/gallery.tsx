@@ -5,21 +5,21 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import Modal from '../components/Modal';
-import { ProductCard } from '../components/Product/ProductCard';
-import Products from '../components/Product/Products';
-import { IProduct, IProducts } from '../model/product';
+import { PaintingCard } from '../components/Product/PaintingCard';
+import Paintings from '../components/Product/Paintings';
+import { IPainting, IPaintings } from '../model/product';
 import { API_URL } from '../utils/urls';
 import { childrenVariants, containerVariants } from '../utils/variants';
 
-const Gallery = ({ products }: IProducts): JSX.Element => {
+const Gallery = ({ paintings }: IPaintings): JSX.Element => {
     const router = useRouter();
-    const [selectedProduct, setSelectedProduct] = useState<IProduct>(products[0]);
+    const [selectedPainting, setSelectedPainting] = useState<IPainting>(paintings[0]);
     useEffect(() => {
-        if (router.query.product && products && products.length > 0) {
-            const product = products.find((product) => product.slug === router.query.product);
-            if (product) setSelectedProduct(product);
+        if (router.query.painting && paintings && paintings.length > 0) {
+            const painting = paintings.find((painting) => painting.slug === router.query.painting);
+            if (painting) setSelectedPainting(painting);
         }
-    }, [router.query.product, products]);
+    }, [router.query.painting, paintings]);
     return (
         <>
             <AnimateSharedLayout>
@@ -31,12 +31,16 @@ const Gallery = ({ products }: IProducts): JSX.Element => {
                         variants={containerVariants}
                         className="flex flex-col w-full p-14 max-w-screen-2xl">
                         <motion.div variants={childrenVariants}>
-                            <Products products={products} />
+                            <Paintings paintings={paintings} />
                         </motion.div>
                     </motion.div>
                 </div>
-                <Modal showModal={!!router.query.product} returnHref={router.pathname}>
-                    <ProductCard product={selectedProduct} isModal returnHref={router.pathname} />
+                <Modal showModal={!!router.query.painting} returnHref={router.pathname}>
+                    <PaintingCard
+                        painting={selectedPainting}
+                        isModal
+                        returnHref={router.pathname}
+                    />
                 </Modal>
             </AnimateSharedLayout>
         </>
@@ -44,10 +48,10 @@ const Gallery = ({ products }: IProducts): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const res = await axios.get(`${API_URL}/products/`);
+    const res = await axios.get(`${API_URL}/paintings/`);
 
-    const products = res.data;
-    return { props: { products }, revalidate: 60 };
+    const paintings = res.data;
+    return { props: { paintings }, revalidate: 60 };
 };
 
 export default Gallery;

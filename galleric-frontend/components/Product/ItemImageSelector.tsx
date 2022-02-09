@@ -5,30 +5,31 @@ import React from 'react';
 import { IImage } from '../../model/product';
 import { fromImageToUrl } from '../../utils/urls';
 
-interface ProductImageSelectorProps {
-    images: Array<IImage>;
-    selectedImage: IImage;
-    setSelectedImage: React.Dispatch<React.SetStateAction<IImage>>;
+interface ItemImageSelectorProps {
+    images?: Array<IImage>;
+    selectedImage?: IImage;
+    setSelectedImage: React.Dispatch<React.SetStateAction<IImage | undefined>>;
 }
 
-export const ProductImageSelector = ({
+export const ItemImageSelector = ({
     images,
     selectedImage,
     setSelectedImage
-}: ProductImageSelectorProps): JSX.Element => {
+}: ItemImageSelectorProps): JSX.Element | null => {
+    if (!images) return null;
     return (
         <div className="flex flex-wrap p-2">
             {images.map((image) => {
                 return (
                     <button
                         className="focus-visible:underline focus:outline-none"
-                        key={'product-image-' + image.id}
+                        key={'painting-image-' + image.id}
                         onClick={() => setSelectedImage(image)}>
                         <motion.img
                             className={clsx(
                                 'm-2 w-14 h-14 border border-transparent object-cover',
                                 {
-                                    'border-gray-100': selectedImage.name === image.name
+                                    'border-gray-100': selectedImage?.name === image.name
                                 }
                             )}
                             src={fromImageToUrl(image)}

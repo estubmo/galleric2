@@ -2,9 +2,9 @@ import { motion, useSpring, useTransform, useViewportScroll } from 'framer-motio
 import React from 'react';
 
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { IProducts } from '../../model/product';
+import { IPaintings } from '../../model/product';
 import { Breakpoints } from '../../utils/breakpoints';
-import Product from './Product';
+import Painting from './Painting';
 
 export const containerVariants = {
     hidden: {
@@ -19,7 +19,7 @@ export const containerVariants = {
     exit: { opacity: 0, transition: { duration: 0.5 } }
 };
 
-const Products = ({ products }: IProducts): JSX.Element => {
+const Paintings = ({ paintings }: IPaintings): JSX.Element => {
     const size = useWindowSize();
     const { scrollYProgress } = useViewportScroll();
 
@@ -39,15 +39,15 @@ const Products = ({ products }: IProducts): JSX.Element => {
 
     return (
         <motion.section
-            className="grid gap-4 grid-cols-1 mt-4 w-full text-gray-900 md:grid-cols-2"
+            className="grid w-full grid-cols-1 gap-4 mt-4 text-gray-900 md:grid-cols-2"
             initial="hidden"
             animate="visible"
             variants={containerVariants}>
-            {products.map((product, index) => (
+            {paintings.map((painting, index) => (
                 <motion.div
                     className="m-6 sm:m-12 md:m-24 lg:m-36"
                     variants={variants}
-                    key={product.slug}
+                    key={painting.slug}
                     style={{
                         y:
                             size && size.width && size.width >= Breakpoints.MD
@@ -56,11 +56,11 @@ const Products = ({ products }: IProducts): JSX.Element => {
                                     : col2ScrollSpring
                                 : col1ScrollSpring
                     }}>
-                    <Product product={product} />
+                    <Painting painting={painting} />
                 </motion.div>
             ))}
         </motion.section>
     );
 };
 
-export default Products;
+export default Paintings;

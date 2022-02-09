@@ -4,31 +4,33 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
-import { IProduct } from '../../model/product';
+import { IPainting } from '../../model/product';
 import { CloseButton } from '../CloseButton';
-import { ProductImage } from './ProductImage';
-import { ProductImageSelector } from './ProductImageSelector';
+import { ItemImage } from './ItemImage';
+import { ItemImageSelector } from './ItemImageSelector';
 
-interface ProductCardProps {
-    product: IProduct;
+interface PaintingCardProps {
+    painting: IPainting;
     isModal?: boolean;
     returnHref?: string;
 }
 
-export const ProductCard = ({
-    product,
+export const PaintingCard = ({
+    painting,
     isModal = false,
     returnHref = ''
-}: ProductCardProps): JSX.Element => {
-    const [selectedImage, setSelectedImage] = useState(product.images[0]);
+}: PaintingCardProps): JSX.Element => {
+    const { images } = painting;
+    const firstImage = images.find((x) => x !== undefined);
+    const [selectedImage, setSelectedImage] = useState(firstImage);
     const router = useRouter();
 
     return (
         <>
-            {product && (
+            {painting && (
                 <motion.div
                     className="fixed top-0 left-0 flex justify-center w-full mt-20 text-gray-100 md:my-20 h-90v"
-                    layoutId={`product-container-${product.slug}`}>
+                    layoutId={`painting-container-${painting.slug}`}>
                     <div className="w-full lg:w-90v xl:max-w-screen-xl">
                         <PerfectScrollbar
                             options={{ wheelPropagation: false }}
@@ -62,9 +64,9 @@ export const ProductCard = ({
                                     )}
                                 </div>
                                 {/* TODO: Add image zoom/scroll wrapper */}
-                                <ProductImage productSlug={product.slug} image={selectedImage} />
-                                <ProductImageSelector
-                                    images={product.images}
+                                <ItemImage slug={painting.slug} image={selectedImage} />
+                                <ItemImageSelector
+                                    images={painting.images}
                                     selectedImage={selectedImage}
                                     setSelectedImage={setSelectedImage}
                                 />
@@ -72,21 +74,21 @@ export const ProductCard = ({
                                     <div className="flex justify-between">
                                         <motion.h3
                                             className="font-mono text-sm tracking-widest uppercase md:text-base"
-                                            layoutId={`product-name-${product.slug}`}>
-                                            {product.name}
+                                            layoutId={`painting-name-${painting.slug}`}>
+                                            {painting.name}
                                         </motion.h3>
                                         {/* <motion.p
                                                 className="font-mono"
-                                                layoutId={`product-price-${product.slug}`}>
+                                                layoutId={`painting-price-${painting.slug}`}>
                                                 {formatCurrencyString({
-                                                    value: product.price,
-                                                    currency: product.currency
+                                                    value: painting.price,
+                                                    currency: painting.currency
                                                 })}
                                             </motion.p> */}
                                     </div>
                                 </div>
                                 <div className="p-4 mb-14 font-extralight">
-                                    <ReactMarkdown>{product.content}</ReactMarkdown>
+                                    <ReactMarkdown>{painting.content}</ReactMarkdown>
                                 </div>
                             </div>
                         </PerfectScrollbar>

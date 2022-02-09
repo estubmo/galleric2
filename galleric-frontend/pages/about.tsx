@@ -53,16 +53,17 @@ const About = ({ aboutData }: IAboutData): JSX.Element => {
                                 objectFit="cover"
                                 src={fromImageToUrl(portrait)}
                                 alt="portrait"
+                                quality={50}
                             />
                         </motion.div>
                     )}
                     {paragraphs.map((paragraph, index) => (
-                        <motion.p
+                        <motion.div
                             key={index}
                             className="mt-4 leading-6 tracking-wider font-extralight"
                             variants={childrenVariants}>
                             <ReactMarkdown>{paragraph}</ReactMarkdown>
-                        </motion.p>
+                        </motion.div>
                     ))}
                 </div>
             </motion.div>
