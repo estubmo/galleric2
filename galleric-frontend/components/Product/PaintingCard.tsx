@@ -27,12 +27,25 @@ export const PaintingCard = ({
     const [selectedImage, setSelectedImage] = useState<IImage | undefined>(firstImage);
 
     const handleSetSelectedImage = (image: IImage): void => {
+        console.log(
+            '%cGalleric%cline:29%cimage',
+            'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+            'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+            'color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px',
+            image
+        );
         if (!isLoading) {
             setLoadingImage(image);
             setIsLoading(true);
         }
     };
     const handleLoadingComplete = (): void => {
+        console.log(
+            '%cGalleric%cline:42%chandleLoadingComplete',
+            'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+            'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+            'color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px'
+        );
         if (isLoading) {
             setSelectedImage(loadingImage);
             setLoadingImage(undefined);
