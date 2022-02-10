@@ -10,7 +10,7 @@ interface ItemImageProps {
     image?: IImage;
     loadingImage?: IImage;
     slug: string;
-    onLoadingComplete: () => void;
+    onLoadingComplete: (image: IImage) => void;
 }
 
 export const ItemImage = ({
@@ -31,7 +31,7 @@ export const ItemImage = ({
                 layout="responsive"
                 width={image.width}
                 height={image.height}
-                onLoadingComplete={onLoadingComplete}
+                onLoadingComplete={() => onLoadingComplete(loadingImage || image)}
                 src={fromImageToUrl(loadingImage || image, IMAGE_FORMATS.LARGE)}
                 quality={80}
                 alt={image.alternativeText}

@@ -22,35 +22,15 @@ export const PaintingCard = ({
 }: PaintingCardProps): JSX.Element => {
     const { images } = painting;
     const firstImage = images.find((x) => x !== undefined);
-    const [isLoading, setIsLoading] = useState(true);
     const [loadingImage, setLoadingImage] = useState<IImage | undefined>(firstImage);
     const [selectedImage, setSelectedImage] = useState<IImage | undefined>(firstImage);
 
     const handleSetSelectedImage = (image: IImage): void => {
-        console.log(
-            '%cGalleric%cline:29%cimage',
-            'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
-            'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
-            'color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px',
-            image
-        );
-        if (!isLoading) {
-            setLoadingImage(image);
-            setIsLoading(true);
-        }
+        setLoadingImage(image);
     };
-    const handleLoadingComplete = (): void => {
-        console.log(
-            '%cGalleric%cline:42%chandleLoadingComplete',
-            'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
-            'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
-            'color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px'
-        );
-        if (isLoading) {
-            setSelectedImage(loadingImage);
-            setLoadingImage(undefined);
-            setIsLoading(false);
-        }
+    const handleLoadingComplete = (image: IImage): void => {
+        setSelectedImage(image);
+        setLoadingImage(undefined);
     };
 
     const router = useRouter();
@@ -59,9 +39,6 @@ export const PaintingCard = ({
         <>
             {painting && (
                 <>
-                    <div>isLoading: {isLoading ? 'true' : 'false'}</div>
-                    <div>loadingImage.name: {loadingImage?.name}</div>
-                    <div>selectedImage: {selectedImage?.name}</div>
                     <motion.div
                         className="fixed top-0 left-0 flex justify-center w-full mt-20 text-gray-100 md:my-20 h-90v"
                         layoutId={`painting-container-${painting.slug}`}>
