@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
+
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     // https://github.com/stripe/stripe-node#configuration
@@ -15,11 +16,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
         const checkout_session: Stripe.Checkout.Session = await stripe.checkout.sessions.retrieve(
             id,
-            { expand: ['payment_intent'] }
+            {
+                expand: ['payment_intent']
+            }
         );
 
         res.status(200).json(checkout_session);
     } catch (err) {
-        res.status(500).json({ statusCode: 500, message: err.message });
+        const errorMessage = err instanceof Error ? err.message : 'Internal server error';
+        res.status(500).json({ statusCode: 500, message: errorMessage });
     }
 }

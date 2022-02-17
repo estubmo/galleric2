@@ -13,8 +13,8 @@
     },
     "license": "MIT",
     "dependencies": {
-        "@stripe/react-stripe-js": "1.6.0",
-        "@stripe/stripe-js": "1.19.1",
+        "@stripe/react-stripe-js": "^1.7.0",
+        "@stripe/stripe-js": "^1.23.0",
         "@tailwindcss/aspect-ratio": "^0.3.0",
         "@typescript-eslint/eslint-plugin": "^4.11.1",
         "@typescript-eslint/parser": "^4.11.1",
@@ -32,9 +32,9 @@
         "react-intersection-observer": "^8.32.0",
         "react-markdown": "^7.1.0",
         "react-perfect-scrollbar": "^1.5.8",
-        "stripe": "^8.202.0",
+        "stripe": "^8.203.0",
         "swr": "^1.0.1",
-        "use-shopping-cart": "2.4.3"
+        "use-shopping-cart": "^3.0.5"
     },
     "devDependencies": {
         "@next/eslint-plugin-next": "^12.0.3",

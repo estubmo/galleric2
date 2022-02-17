@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-import { NextApiRequest } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 /*
  * Product data can be loaded from anywhere. In this case, we’re loading it from
@@ -10,25 +9,33 @@ import Stripe from 'stripe';
  * The important thing is that the product info is loaded from somewhere trusted
  * so you know the pricing information is accurate.
  */
-import { validateCartItems } from 'use-shopping-cart/src/serverUtil';
+import { validateCartItems } from 'use-shopping-cart/utilities/serverless';
 
 import { API_URL } from '../../../utils/urls';
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+// import inventory from '../../../data/products';
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     // https://github.com/stripe/stripe-node#configuration
     apiVersion: '2020-08-27'
 });
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default async function handler(req: NextApiRequest, res: any) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-            const response = await axios.get(`${API_URL}/products/`);
-            const products = response.data;
             // Validate the cart details that were sent from the client.
-            const cartItems = req.body;
-            const line_items = validateCartItems(products, cartItems);
+            const inventory = await axios.get(`${API_URL}/products`);
+            const line_items = validateCartItems(inventory as any, req.body);
+            console.log(
+                '%cRetNemt%cline:28%cline_items',
+                'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+                'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+                'color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px',
+                line_items
+            );
+            const hasSubscription = line_items.find((item) => {
+                return !!item.price_data.recurring;
+            });
             // Create Checkout Sessions from body params.
             const params: Stripe.Checkout.SessionCreateParams = {
                 submit_type: 'pay',
@@ -39,15 +46,19 @@ export default async function handler(req: NextApiRequest, res: any) {
                 },
                 line_items,
                 success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-                cancel_url: `${req.headers.origin}/use-shopping-cart`
+                cancel_url: `${req.headers.origin}/use-shopping-cart`,
+                mode: hasSubscription ? 'subscription' : 'payment'
             };
+
             const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
                 params
             );
 
             res.status(200).json(checkoutSession);
         } catch (err) {
-            res.status(500).json({ statusCode: 500, message: err.message });
+            console.log(err);
+            const errorMessage = err instanceof Error ? err.message : 'Internal server error';
+            res.status(500).json({ statusCode: 500, message: errorMessage });
         }
     } else {
         res.setHeader('Allow', 'POST');

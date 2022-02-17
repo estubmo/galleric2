@@ -6,16 +6,12 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 
+import Cart from '../components/Cart';
+import CartSummary from '../components/CartSummary';
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
     return (
-        // <CartProvider
-        //     mode="client-only"
-        //     successUrl="/"
-        //     cancelUrl="/"
-        //     stripe={getStripe()}
-        //     currency={config.CURRENCY}>
         <>
             <Head>
                 <title>Svanhild Stub</title>
@@ -24,11 +20,12 @@ function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
             </Head>
             <Layout>
                 <AnimatePresence exitBeforeEnter>
-                    <Component {...pageProps} key={router.route} layoutId={router.route} />
+                    <Cart>
+                        <Component {...pageProps} key={router.route} layoutId={router.route} />
+                    </Cart>
                 </AnimatePresence>
             </Layout>
         </>
-        // </CartProvider>
     );
 }
 

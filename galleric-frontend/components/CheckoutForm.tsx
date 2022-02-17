@@ -34,7 +34,6 @@ const CheckoutForm = (): JSX.Element => {
 
         // Redirect to Checkout.
         const stripe = await getStripe();
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const { error } = await stripe!.redirectToCheckout({
             // Make the id field from the Checkout Session creation API response
             // available to this file, so you can provide it as parameter here

@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { formatCurrencyString } from 'use-shopping-cart';
+import { useShoppingCart } from 'use-shopping-cart/react';
 
 import { IImage, IPainting } from '../../model/product';
 import { CloseButton } from '../CloseButton';
@@ -20,10 +22,18 @@ export const PaintingCard = ({
     isModal = false,
     returnHref = ''
 }: PaintingCardProps): JSX.Element => {
-    const { images } = painting;
+    const { images, product } = painting;
     const firstImage = images.find((x) => x !== undefined);
     const [loadingImage, setLoadingImage] = useState<IImage | undefined>(firstImage);
     const [selectedImage, setSelectedImage] = useState<IImage | undefined>(firstImage);
+    const { addItem, removeItem, cartDetails } = useShoppingCart();
+    console.log(
+        '%cRetNemt%cline:29%ccartDetails',
+        'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+        'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+        'color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px',
+        cartDetails
+    );
 
     const handleSetSelectedImage = (image: IImage): void => {
         setLoadingImage(image);
@@ -88,20 +98,33 @@ export const PaintingCard = ({
                                     />
                                     <div className="p-4">
                                         <div className="flex justify-between">
-                                            <motion.h3
-                                                className="font-mono text-sm tracking-widest uppercase md:text-base"
-                                                layoutId={`painting-name-${painting.slug}`}>
+                                            <motion.h3 className="font-mono text-sm tracking-widest uppercase md:text-base">
                                                 {painting.name}
                                             </motion.h3>
-                                            {/* <motion.p
-                                                className="font-mono"
-                                                layoutId={`painting-price-${painting.slug}`}>
-                                                {formatCurrencyString({
-                                                    value: painting.price,
-                                                    currency: painting.currency
-                                                })}
-                                            </motion.p> */}
+                                            {product && (
+                                                <>
+                                                    <motion.p className="font-mono">
+                                                        {product.price} {product.currency}
+                                                    </motion.p>
+                                                </>
+                                            )}
                                         </div>
+                                        {product && (
+                                            <>
+                                                <button
+                                                    className="px-4 py-2 font-bold text-gray-800 bg-white rounded-full"
+                                                    onClick={() => {
+                                                        addItem(product);
+                                                    }}>
+                                                    Add to cart
+                                                </button>
+                                                <button
+                                                    className="px-4 py-2 font-bold text-gray-800 bg-white rounded-full"
+                                                    onClick={() => removeItem(product.id)}>
+                                                    Remove
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
                                     <div className="p-4 mb-14 font-extralight">
                                         <ReactMarkdown>{painting.content}</ReactMarkdown>

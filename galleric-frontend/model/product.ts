@@ -43,6 +43,7 @@ export enum IMAGE_FORMATS {
 }
 
 export interface IProduct {
+    id: string;
     name: string;
     price: number;
     slug: string;
@@ -53,6 +54,7 @@ export interface IProduct {
     course?: ICourse;
 }
 export interface IPainting {
+    id: string;
     name: string;
     images: Array<IImage>;
     content: string;

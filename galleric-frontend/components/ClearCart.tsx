@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { useShoppingCart } from 'use-shopping-cart';
+import { useEffect } from 'react';
+import { useShoppingCart } from 'use-shopping-cart/react';
 
-export default function ClearCart(): JSX.Element {
+export default function ClearCart() {
     const { clearCart } = useShoppingCart();
 
     useEffect(() => clearCart(), [clearCart]);
