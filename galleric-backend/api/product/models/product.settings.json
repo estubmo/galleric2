@@ -20,7 +20,11 @@
     },
     "currency": {
       "type": "enumeration",
-      "enum": ["USD", "EUR", "NOK"],
+      "enum": [
+        "USD",
+        "EUR",
+        "NOK"
+      ],
       "default": "EUR",
       "required": true
     },
@@ -42,6 +46,9 @@
     "course": {
       "via": "product",
       "model": "course"
+    },
+    "description": {
+      "type": "string"
     }
   }
 }

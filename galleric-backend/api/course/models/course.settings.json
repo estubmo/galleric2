@@ -21,8 +21,8 @@
       "type": "integer"
     },
     "product": {
-      "model": "product",
-      "via": "course"
+      "via": "course",
+      "model": "product"
     }
   }
 }

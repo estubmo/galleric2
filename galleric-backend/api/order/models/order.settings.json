@@ -12,7 +12,10 @@
   "attributes": {
     "status": {
       "type": "enumeration",
-      "enum": ["paid", "unpaid"]
+      "enum": [
+        "paid",
+        "unpaid"
+      ]
     },
     "total": {
       "type": "decimal"

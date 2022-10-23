@@ -21,8 +21,8 @@
       "model": "painting"
     },
     "product": {
-      "model": "product",
-      "via": "print"
+      "via": "print",
+      "model": "product"
     }
   }
 }
