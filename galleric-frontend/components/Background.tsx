@@ -37,7 +37,10 @@ const Background = ({ children, colorFrom, colorTo }: BackgroundProps): JSX.Elem
     }
 
     return (
-        <motion.div className="z-20" ref={ref} style={{ backgroundColor: background }}>
+        <motion.div
+            className="relative z-20 overflow-hidden"
+            ref={ref}
+            style={{ backgroundColor: background }}>
             {children}
         </motion.div>
     );

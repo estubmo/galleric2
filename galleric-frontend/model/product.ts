@@ -91,3 +91,44 @@ export interface IProducts {
 export interface IPaintings {
     paintings: Array<IPainting>;
 }
+
+export interface IStripeProduct {
+    /**
+     * The name of the product
+     */
+    name: string;
+    /**
+     * The description of the product
+     */
+    description?: string;
+    /**
+     * A unique product ID
+     */
+    id: string;
+    /**
+     * The price of the product
+     */
+    price: number;
+    /**
+     * A URL to an image of the product
+     */
+    image?: string;
+    /**
+     * The currency of the product
+     */
+    currency: string;
+    /**
+     * Values that go into the price_metadata field
+     */
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    price_data?: object;
+    /**
+     * Values that go into the product_metadata field
+     */
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    product_data?: object;
+    /**
+     * Any additional properties
+     */
+    [propName: string]: any;
+}

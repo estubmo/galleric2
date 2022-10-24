@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { formatCurrencyString } from 'use-shopping-cart';
-import { useShoppingCart } from 'use-shopping-cart/react';
 
-import { IImage, IPainting } from '../../model/product';
-import { CloseButton } from '../CloseButton';
+import { IImage, IPainting, IStripeProduct } from '../../model/product';
+import { CURRENCIES, getFormattedPriceString } from '../../utils/currency';
+import { marshalProductToStripe } from '../../utils/products';
+import { CloseButton } from '../Buttons/CloseButton';
 import { ItemImage } from './ItemImage';
 import { ItemImageSelector } from './ItemImageSelector';
 
@@ -26,14 +26,6 @@ export const PaintingCard = ({
     const firstImage = images.find((x) => x !== undefined);
     const [loadingImage, setLoadingImage] = useState<IImage | undefined>(firstImage);
     const [selectedImage, setSelectedImage] = useState<IImage | undefined>(firstImage);
-    const { addItem, removeItem, cartDetails } = useShoppingCart();
-    console.log(
-        '%cRetNemt%cline:29%ccartDetails',
-        'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
-        'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
-        'color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px',
-        cartDetails
-    );
 
     const handleSetSelectedImage = (image: IImage): void => {
         setLoadingImage(image);
@@ -42,6 +34,14 @@ export const PaintingCard = ({
         setSelectedImage(image);
         setLoadingImage(undefined);
     };
+    let marshalledProduct: IStripeProduct | undefined;
+    if (product) {
+        const mappedProduct = {
+            ...product,
+            painting: painting
+        };
+        marshalledProduct = marshalProductToStripe(mappedProduct);
+    }
 
     const router = useRouter();
 
@@ -101,26 +101,31 @@ export const PaintingCard = ({
                                             <motion.h3 className="font-mono text-sm tracking-widest uppercase md:text-base">
                                                 {painting.name}
                                             </motion.h3>
-                                            {product && (
+                                            {product && marshalledProduct && (
                                                 <>
                                                     <motion.p className="font-mono">
-                                                        {product.price} {product.currency}
+                                                        {getFormattedPriceString(
+                                                            product.price,
+                                                            CURRENCIES.EUR
+                                                        )}
                                                     </motion.p>
                                                 </>
                                             )}
                                         </div>
-                                        {product && (
+                                        {product && marshalledProduct && (
                                             <>
                                                 <button
                                                     className="px-4 py-2 font-bold text-gray-800 bg-white rounded-full"
                                                     onClick={() => {
-                                                        addItem(product);
+                                                        console.log('add item');
                                                     }}>
                                                     Add to cart
                                                 </button>
                                                 <button
                                                     className="px-4 py-2 font-bold text-gray-800 bg-white rounded-full"
-                                                    onClick={() => removeItem(product.id)}>
+                                                    onClick={() => {
+                                                        console.log('remove item');
+                                                    }}>
                                                     Remove
                                                 </button>
                                             </>

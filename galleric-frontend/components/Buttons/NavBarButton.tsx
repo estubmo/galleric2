@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react';
 
 interface INavBarButtonProps {
     href: string;
-    as: string;
+    as?: string;
     onClick: () => void;
     disabled?: boolean;
     children: ReactNode;

@@ -6,14 +6,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import useUser from '../lib/useUser';
 import { routes } from '../utils/routes';
-import AccountButton from './AccountButton';
-import Cart from './Cart';
-import CartButton from './CartButton';
-import CartSummary from './CartSummary';
-import { CloseButton } from './CloseButton';
+import AccountButton from './Buttons/AccountButton';
+import CartButton from './Buttons/CartButton';
+import { CloseButton } from './Buttons/CloseButton';
+import NavBarButton from './Buttons/NavBarButton';
+import NavBarHamburgerButton from './Buttons/NavBarHamburgerButton';
 import Modal from './Modal';
-import NavBarButton from './NavBarButton';
-import NavBarHamburgerButton from './NavBarHamburgerButton';
 import NavBarLink from './NavBarLink';
 
 const hideNavBarVariants = {
@@ -206,28 +204,24 @@ const NavBar = (): JSX.Element => {
                             <AccountButton className="text-gray-100" />
                         </NavBarButton>
                         <NavBarButton
-                            disabled
-                            href="?openCart=true"
-                            as="/cart"
-                            onClick={() => handleSetOpen(false)}>
+                            href="/cart"
+                            onClick={() => handleSetOpen(false)}
+                            disabled={pathname === '/cart'}>
                             <CartButton className="text-gray-100" />
                         </NavBarButton>
                     </div>
                 </div>
             </motion.nav>
             <Modal showModal={!!router.query.openCart} returnHref={router.pathname}>
-                <div className="z-40 flex flex-col p-4 m-8 bg-gray-900 bg-opacity-90 rounded-xl">
-                    <Cart>
-                        <div className="relative">
-                            <div className="absolute top-0 right-0">
-                                <CloseButton
-                                    className="text-gray-100 cursor-pointer focus-visible:underline focus:outline-none"
-                                    close={() => router.back()}
-                                />
-                            </div>
-                            <CartSummary />
+                <div className="z-40 flex flex-col p-4 m-20 text-white bg-gray-900 w-90v h-90v bg-opacity-90">
+                    <div className="relative">
+                        <div className="absolute top-0 right-0">
+                            <CloseButton
+                                className="text-gray-100 cursor-pointer focus-visible:underline focus:outline-none"
+                                close={() => router.back()}
+                            />
                         </div>
-                    </Cart>
+                    </div>
                 </div>
             </Modal>
         </div>

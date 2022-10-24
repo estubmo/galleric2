@@ -2,14 +2,14 @@ import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
 
-import Parallax from '../components/Parallax';
-import Scale from '../components/Scale';
 import {
     slideFromLeftVariants,
     slideFromRightVariants,
     slideUpTextVariants
 } from '../constants/variants';
 import { ISlideComponent } from '../model/frontpage';
+import Parallax from './AnimationElements/Parallax';
+import Scale from './AnimationElements/Scale';
 
 const parentVariants: Variants = {
     visible: {

@@ -8,8 +8,8 @@ import {
     slideUpTextVariants
 } from '../constants/variants';
 import { ISlideComponent } from '../model/frontpage';
-import Parallax from './Parallax';
-import Scale from './Scale';
+import Parallax from './AnimationElements/Parallax';
+import Scale from './AnimationElements/Scale';
 
 const parentVariants: Variants = {
     visible: {
