@@ -35,3 +35,10 @@ yarn-error.log*
 
 #eslint
 .eslintcache
+
+#turbo
+/.turbo
+
+#husky
+/.husky
+

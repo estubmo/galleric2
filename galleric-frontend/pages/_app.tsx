@@ -4,7 +4,6 @@ import '../styles/globals.css';
 import { AnimatePresence } from 'framer-motion';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import Layout from '../components/Layout';
